@@ -138,6 +138,9 @@ export default function Home() {
                 style={{
                   display: "flex",
                   marginBottom: "10px",
+                  padding: "12px",
+                  border: "2px solid rgb(219, 219, 219)",
+                  borderRadius: "2px",
                 }}
               >
                 <div style={{ marginRight: "10px" }}>
@@ -157,7 +160,12 @@ export default function Home() {
                     />
                   )}
                 </div>
-                <div style={{ fontWeight: "bold", fontSize: "1.2em" }}>
+                <div
+                  style={{
+                    fontWeight: "bold",
+                    fontSize: "1.2em",
+                  }}
+                >
                   {dialogueElement.text.split("\n").map((row, rowIdx) => {
                     return (
                       <div key={`${dialogueIdx}-${rowIdx}`}>
@@ -202,6 +210,9 @@ export default function Home() {
               onClick={submit}
               disabled={responding}
               style={{
+                color: "rgb(219, 219, 219)",
+                background: "rgb(7, 180, 179)",
+                border: "2px solid white",
                 display: "block",
                 textAlign: "right",
                 padding: "5px",
