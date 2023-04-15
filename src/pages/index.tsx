@@ -251,7 +251,7 @@ export default function Home() {
               fontSize: "1.2em",
             }}
           />
-          <div style={{ textAlign: "right", width: "100%", marginTop: "20px" }}>
+          <div style={{ textAlign: "right", width: "100%", marginTop: "30px" }}>
             <input
               type="button"
               value="最適化の支援を要求"
