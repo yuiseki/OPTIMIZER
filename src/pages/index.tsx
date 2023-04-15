@@ -2,6 +2,7 @@
 import Head from "next/head";
 import styles from "@/styles/Home.module.css";
 import { useCallback, useEffect, useState } from "react";
+import { nextJsonPost } from "@/lib/nextJsonPost";
 
 const initializeSequence = [
   `対話型制度探索社会最適化支援システム。
@@ -14,7 +15,7 @@ const initializeSequence = [
 ];
 
 export default function Home() {
-  const [dialogueList, setResponseTextList] = useState<
+  const [dialogueList, setDialogueList] = useState<
     {
       who: string;
       text: string;
@@ -57,7 +58,7 @@ export default function Home() {
         { who: "assistant", text: newResponseText },
       ];
     }
-    setResponseTextList(newResponseTextList);
+    setDialogueList(newResponseTextList);
     setResponseTextListLength(newResponseTextList.length);
     if (
       lastResponseTextLength <
@@ -76,14 +77,44 @@ export default function Home() {
   }, [lastResponseTextLength, responseTextListLength]);
 
   useEffect(() => {
-    setTimeout(initializer, 100);
+    setTimeout(initializer, 50);
   }, [initializer]);
 
-  const submit = useCallback(() => {
+  const submit = useCallback(async () => {
     setResponding(true);
-    setResponseTextList([...dialogueList, { who: "user", text: inputText }]);
+    const newInputText = inputText;
     setInputText("");
+    const newDialogueListWithUser = [
+      ...dialogueList,
+      { who: "user", text: inputText },
+    ];
+    setDialogueList(newDialogueListWithUser);
     setResponding(false);
+    const res = await nextJsonPost("/api/search", { query: newInputText });
+    const json = await res.json();
+    console.log(json);
+    const systemTitles: string = json
+      .map((system: [{ metadata: any; pageContent: string }, number]) => {
+        return (
+          "- " +
+          system[0].pageContent
+            .split("\n")[1]
+            .replace("title: ", "")
+            .replaceAll(",", "")
+        );
+      })
+      .join("\n");
+    console.log(systemTitles);
+    const newDialogueListWithUserAndAssistant = [
+      ...newDialogueListWithUser,
+      {
+        who: "assistant",
+        text:
+          "あたたの状況において社会を最適化させるために、以下の制度が有用であると推測しました。\n" +
+          systemTitles,
+      },
+    ];
+    setDialogueList(newDialogueListWithUserAndAssistant);
   }, [inputText, dialogueList]);
 
   return (
@@ -95,7 +126,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.main}>
-        <div style={{ width: "50vw" }}>
+        <div style={{ width: "50vw", paddingBottom: "10vh" }}>
           {dialogueList.map((dialogueElement, dialogueIdx) => {
             return (
               <div
@@ -140,34 +171,40 @@ export default function Home() {
               </div>
             );
           })}
-          <div style={{ position: "absolute", bottom: 25, width: "50vw" }}>
-            <textarea
-              value={inputText}
-              onChange={(e) => setInputText(e.currentTarget.value)}
-              rows={4}
+        </div>
+        <div
+          style={{
+            position: "relative",
+            bottom: "5em",
+            width: "50vw",
+          }}
+        >
+          <textarea
+            value={inputText}
+            onChange={(e) => setInputText(e.currentTarget.value)}
+            rows={4}
+            style={{
+              width: "100%",
+              padding: "12px 8px",
+              borderRadius: "6px",
+              fontSize: "1.2em",
+            }}
+          />
+          <div style={{ textAlign: "right", width: "100%" }}>
+            <input
+              type="button"
+              value="最適化を実行"
+              onClick={submit}
+              disabled={responding}
               style={{
-                width: "100%",
-                padding: "12px 8px",
-                borderRadius: "6px",
-                fontSize: "1.2em",
+                display: "block",
+                textAlign: "right",
+                padding: "5px",
+                marginRight: 0,
+                marginLeft: "auto",
+                fontSize: "1em",
               }}
             />
-            <div style={{ textAlign: "right", width: "100%" }}>
-              <input
-                type="button"
-                value="最適化を実行"
-                onClick={submit}
-                disabled={responding}
-                style={{
-                  display: "block",
-                  textAlign: "right",
-                  padding: "5px",
-                  marginRight: 0,
-                  marginLeft: "auto",
-                  fontSize: "1em",
-                }}
-              />
-            </div>
           </div>
         </div>
       </main>

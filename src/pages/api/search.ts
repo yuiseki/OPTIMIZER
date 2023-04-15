@@ -6,7 +6,15 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const { query } = req.query;
+  let query = undefined;
+  const { query: queryInQuery } = req.query;
+  if (queryInQuery !== undefined) {
+    query = queryInQuery;
+  }
+  const { query: queryInBody } = req.body;
+  if (queryInBody !== undefined) {
+    query = queryInBody;
+  }
   if (query === undefined) {
     res.status(400).json({ status: "ng", message: "query is too long" });
     return;
