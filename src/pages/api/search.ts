@@ -1,6 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { OpenAIEmbeddings } from "langchain/embeddings/openai";
 import { HNSWLib } from "langchain/vectorstores/hnswlib";
+import path from "path";
 
 export default async function handler(
   req: NextApiRequest,
@@ -33,7 +34,7 @@ export default async function handler(
     return;
   }
 
-  const directory = "public/vector_store";
+  const directory = path.resolve("public", "vector_store");
   const vectorStore = await HNSWLib.load(directory, new OpenAIEmbeddings());
 
   const results = await vectorStore.similaritySearchWithScore(queryString, 5);
