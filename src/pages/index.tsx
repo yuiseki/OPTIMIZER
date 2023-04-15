@@ -153,7 +153,7 @@ export default function Home() {
                     />
                   )}
                 </div>
-                <div style={{ fontWeight: "bold" }}>
+                <div style={{ fontWeight: "bold", fontSize: "1.2em" }}>
                   {dialogueElement.text.split("\n").map((row, rowIdx) => {
                     return (
                       <div key={`${dialogueIdx}-${rowIdx}`}>
