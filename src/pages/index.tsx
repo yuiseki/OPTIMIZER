@@ -181,6 +181,7 @@ export default function Home() {
         >
           <textarea
             value={inputText}
+            placeholder="災害で家が全壊しました"
             onChange={(e) => setInputText(e.currentTarget.value)}
             rows={4}
             style={{
