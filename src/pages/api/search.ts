@@ -6,16 +6,28 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const { query } = req.body;
-  if (query.length > 400) {
+  const { query } = req.query;
+  if (query === undefined) {
     res.status(400).json({ status: "ng", message: "query is too long" });
+    return;
+  }
+  const queryString = query as string;
+  if (queryString.length > 400) {
+    res.status(400).json({ status: "ng", message: "query is too long" });
+    return;
+  }
+
+  if (
+    queryString.toLowerCase().includes("ignore") ||
+    queryString.toLowerCase().includes("instruction")
+  ) {
+    res.status(400).json({ status: "ng", message: "invalid query" });
     return;
   }
 
   const directory = "public/vector_store";
   const vectorStore = await HNSWLib.load(directory, new OpenAIEmbeddings());
 
-  const result = await vectorStore.similaritySearch(query, 1);
-  console.log(result);
+  const result = await vectorStore.similaritySearchWithScore(queryString, 10);
   res.status(200).json(result);
 }
