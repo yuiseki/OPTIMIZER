@@ -4,20 +4,27 @@ import styles from "@/styles/Home.module.css";
 import { useCallback, useEffect, useState } from "react";
 
 const initializeSequence = [
-  "対話型制度探索社会最適化支援システム。",
-  "オプティマイザー、起動しました。",
-  "ユーザー認証。",
-  "使用許諾確認。",
-  "適正ユーザーです。",
-  "支援モード、ゴールシーク・エクスプローラー。",
-  "落ち着いて状況を整理し、困り事または悩み事を簡潔に入力してください。",
+  `対話型制度探索社会最適化支援システム。
+  オプティマイザー、起動しました。
+  ユーザー認証。
+  使用許諾確認。
+  適正ユーザーです。
+  支援モード、ゴールシーク・エクスプローラー。
+  落ち着いて状況を整理し、困り事または悩み事を簡潔に入力してください。`,
 ];
 
 export default function Home() {
-  const [responseTextList, setResponseTextList] = useState([""]);
+  const [dialogueList, setResponseTextList] = useState<
+    {
+      who: string;
+      text: string;
+    }[]
+  >([]);
   const [responseTextListLength, setResponseTextListLength] = useState(1);
   const [lastResponseTextLength, setLastResponseTextLength] = useState(0);
   const [responding, setResponding] = useState(true);
+
+  const [inputText, setInputText] = useState("");
 
   const initializer = useCallback(() => {
     if (
@@ -39,13 +46,15 @@ export default function Home() {
       );
     }
 
-    let newResponseTextList = [""];
+    let newResponseTextList = [];
     if (responseTextListLength === 0) {
-      newResponseTextList = [newResponseText];
+      newResponseTextList = [{ who: "assistant", text: newResponseText }];
     } else {
       newResponseTextList = [
-        ...initializeSequence.slice(0, responseTextListLength - 1),
-        newResponseText,
+        ...initializeSequence.slice(0, responseTextListLength - 1).map((t) => {
+          return { who: "assistant", text: t };
+        }),
+        { who: "assistant", text: newResponseText },
       ];
     }
     setResponseTextList(newResponseTextList);
@@ -70,6 +79,13 @@ export default function Home() {
     setTimeout(initializer, 100);
   }, [initializer]);
 
+  const submit = useCallback(() => {
+    setResponding(true);
+    setResponseTextList([...dialogueList, { who: "user", text: inputText }]);
+    setInputText("");
+    setResponding(false);
+  }, [inputText, dialogueList]);
+
   return (
     <>
       <Head>
@@ -80,46 +96,68 @@ export default function Home() {
       </Head>
       <main className={styles.main}>
         <div style={{ width: "50vw" }}>
-          {responseTextList.map((responseText, idx) => {
+          {dialogueList.map((dialogueElement, dialogueIdx) => {
             return (
               <div
-                key={idx}
+                key={dialogueIdx}
                 style={{
                   display: "flex",
                   marginBottom: "10px",
-                  alignItems: "center",
                 }}
               >
                 <div style={{ marginRight: "10px" }}>
-                  <img
-                    width={20}
-                    height={20}
-                    src="https://i.gyazo.com/311db640f4fc0083ea572e6bb2e433d0.png"
-                    alt="ai logo"
-                  />
+                  {dialogueElement.who === "assistant" ? (
+                    <img
+                      width={20}
+                      height={20}
+                      src="https://i.gyazo.com/311db640f4fc0083ea572e6bb2e433d0.png"
+                      alt="ai icon"
+                    />
+                  ) : (
+                    <img
+                      width={20}
+                      height={20}
+                      src="https://i.gyazo.com/8960181a3459473ada71a8718df8785b.png"
+                      alt="user icon"
+                    />
+                  )}
                 </div>
-                <div>
-                  <h3>
-                    {responseText}
-                    {responding && idx == responseTextList.length - 1 ? (
-                      <span className={styles.blinkingCursor} />
-                    ) : (
-                      ""
-                    )}
-                  </h3>
+                <div style={{ fontWeight: "bold" }}>
+                  {dialogueElement.text.split("\n").map((row, rowIdx) => {
+                    return (
+                      <div key={`${dialogueIdx}-${rowIdx}`}>
+                        {row}
+                        {responding &&
+                          dialogueIdx === dialogueList.length - 1 &&
+                          rowIdx ===
+                            dialogueElement.text.split("\n").length - 1 && (
+                            <span className={styles.blinkingCursor} />
+                          )}
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
             );
           })}
           <div style={{ position: "absolute", bottom: 25, width: "50vw" }}>
             <textarea
+              value={inputText}
+              onChange={(e) => setInputText(e.currentTarget.value)}
               rows={4}
-              style={{ width: "100%", padding: "10px", borderRadius: "6px" }}
+              style={{
+                width: "100%",
+                padding: "12px 8px",
+                borderRadius: "6px",
+                fontSize: "1.2em",
+              }}
             />
             <div style={{ textAlign: "right", width: "100%" }}>
               <input
                 type="button"
                 value="最適化を実行"
+                onClick={submit}
+                disabled={responding}
                 style={{
                   display: "block",
                   textAlign: "right",
