@@ -110,7 +110,7 @@ export default function Home() {
       {
         who: "assistant",
         text:
-          "あたたの状況において社会を最適化させるために、以下の制度が有用であると推測しました。\n" +
+          "あたたの状況を改善し社会を最適化させるために、以下の制度が有用であると推測しました。\n" +
           systemTitles,
       },
     ];
@@ -194,7 +194,7 @@ export default function Home() {
           <div style={{ textAlign: "right", width: "100%" }}>
             <input
               type="button"
-              value="最適化を実行"
+              value="最適化のを要求"
               onClick={submit}
               disabled={responding}
               style={{
