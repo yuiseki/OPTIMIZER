@@ -11,7 +11,8 @@ const initializeSequence = [
   使用許諾確認。
   適正ユーザーです。
   支援モード、ゴールシーク・エクスプローラー。
-  落ち着いて状況を整理し、困り事または悩み事を簡潔に入力してください。`,
+  落ち着いて状況を整理し、困り事または悩み事を簡潔に入力してください。
+  ユーザーの入力を待機しています…`,
 ];
 
 export default function Home() {
@@ -77,7 +78,7 @@ export default function Home() {
   }, [lastResponseTextLength, responseTextListLength]);
 
   useEffect(() => {
-    setTimeout(initializer, 50);
+    setTimeout(initializer, 80);
   }, [initializer]);
 
   const submit = useCallback(async () => {
