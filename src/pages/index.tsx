@@ -130,7 +130,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.main}>
-        <div style={{ width: "50vw", paddingBottom: "10vh" }}>
+        <div style={{ width: "60vw", paddingBottom: "10vh" }}>
           {dialogueList.map((dialogueElement, dialogueIdx) => {
             return (
               <div
@@ -144,7 +144,8 @@ export default function Home() {
                   padding: "12px",
                   borderRadius: "2px",
                   border: "2px solid rgba(219, 219, 219, 0.8)",
-                  boxShadow: "0 2px 6px 0 rgba(219, 219, 219, .3)",
+                  boxShadow: "0 2px 6px 0 rgba(219, 219, 219, 0.3)",
+                  backgroundColor: "rgba(79, 79, 79, 0.8)",
                 }}
               >
                 <div
@@ -166,8 +167,16 @@ export default function Home() {
                       backdropFilter: "blur(4px)",
                       backgroundColor:
                         dialogueElement.who === "assistant"
-                          ? "rgba(7, 180, 179, 0.6)"
-                          : "rgba(0, 0, 0, 0.3)",
+                          ? "rgba(7, 180, 180, 0.6)"
+                          : "rgba(0, 0, 0, 0.5)",
+                      border:
+                        dialogueElement.who === "assistant"
+                          ? "2px solid rgba(7, 180, 180, 888)"
+                          : "2px solid rgba(0, 0, 0, 0.1)",
+                      boxShadow:
+                        dialogueElement.who === "assistant"
+                          ? "0 2px 6px 0 rgba(7, 180, 180, 0.4)"
+                          : "0 2px 6px 0 rgba(0, 0, 0, 0.3)",
                     }}
                   >
                     {dialogueElement.who === "assistant" ? (
@@ -176,7 +185,6 @@ export default function Home() {
                         height={30}
                         src="https://i.gyazo.com/311db640f4fc0083ea572e6bb2e433d0.png"
                         alt="ai icon"
-                        style={{ display: "block" }}
                       />
                     ) : (
                       <img
@@ -200,7 +208,7 @@ export default function Home() {
                 <div
                   style={{
                     borderBottom: "2px solid rgba(219, 219, 219, 0.8)",
-                    boxShadow: "0 2px 6px 0 rgba(219, 219, 219, .3)",
+                    boxShadow: "0 2px 6px 0 rgba(219, 219, 219, 0.3)",
                   }}
                 />
                 <div
@@ -232,7 +240,7 @@ export default function Home() {
           style={{
             position: "relative",
             bottom: "5em",
-            width: "50vw",
+            width: "60vw",
           }}
         >
           <textarea
@@ -245,7 +253,7 @@ export default function Home() {
               backgroundColor: "rgba(79, 79, 79, 0.8)",
               borderRadius: "6px",
               border: "2px solid rgba(219, 219, 219, 0.8)",
-              boxShadow: "0 2px 6px 0 rgba(219, 219, 219, .3)",
+              boxShadow: "0 2px 6px 0 rgba(219, 219, 219, 0.3)",
               width: "100%",
               padding: "12px 8px",
               fontSize: "1.2em",
@@ -261,7 +269,7 @@ export default function Home() {
                 color: "rgb(219, 219, 219)",
                 backgroundColor: "rgba(7, 180, 180, 0.6)",
                 border: "2px solid rgba(7, 180, 180, 0.8)",
-                boxShadow: "0 2px 6px 0 rgba(7, 180, 180, .3)",
+                boxShadow: "0 2px 6px 0 rgba(7, 180, 180, 0.4)",
                 display: "block",
                 textAlign: "right",
                 padding: "8px",
