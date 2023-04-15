@@ -244,7 +244,7 @@ export default function Home() {
               fontSize: "1.2em",
             }}
           />
-          <div style={{ textAlign: "right", width: "100%" }}>
+          <div style={{ textAlign: "right", width: "100%", marginTop: "10px" }}>
             <input
               type="button"
               value="最適化の支援を要求"
