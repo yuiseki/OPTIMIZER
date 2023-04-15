@@ -194,7 +194,7 @@ export default function Home() {
                       marginLeft: "4px",
                     }}
                   >
-                    {dialogueElement.who === "assistant" ? "Optimizer" : "User"}
+                    {dialogueElement.who === "assistant" ? "OPTIMIZER" : "User"}
                   </div>
                 </div>
                 <div
