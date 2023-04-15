@@ -194,7 +194,7 @@ export default function Home() {
           <div style={{ textAlign: "right", width: "100%" }}>
             <input
               type="button"
-              value="最適化のを要求"
+              value="最適化の支援を要求"
               onClick={submit}
               disabled={responding}
               style={{
