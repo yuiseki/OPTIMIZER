@@ -1,11 +1,13 @@
 
 all: \
-	public/supports.csv
+	public/supports.csv \
+	vector_store
 
 clean:
 	rm ./tmp/supports/*
 	rm ./public/supports.json
 	rm ./public/supports.csv
+	rm ./public/vector_store/*
 
 .PHONY: fetch_all_supports
 fetch_all_supports:
@@ -18,3 +20,7 @@ public/supports.json: fetch_all_supports
 public/supports.csv: public/supports.json
 	echo "id,title,summary,body,target" > ./public/supports.csv
 	cat public/supports.json | jq -r '.items[] | [.id, .title, .summary, .body, .target] | @csv | gsub("[\\r\\n\\t]"; "") // ""' >> ./public/supports.csv
+
+.PHONY: vector_store
+vector_store:
+	npm run store
