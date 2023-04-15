@@ -7,6 +7,23 @@
   min-height: 100vh;
 }
 
+@keyframes cursor-blink {
+  0% {
+    opacity: 0;
+  }
+}
+
+.blinkingCursor::after {
+  content: "";
+  width: 10px;
+  height: 1.17em;
+  margin-top: 4px;
+  margin-left: 4px;
+  background: black;
+  display: inline-block;
+  animation: cursor-blink 0.5s steps(2) infinite;
+}
+
 .description {
   display: inherit;
   justify-content: inherit;

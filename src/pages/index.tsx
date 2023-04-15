@@ -17,6 +17,7 @@ export default function Home() {
   const [responseTextList, setResponseTextList] = useState([""]);
   const [responseTextListLength, setResponseTextListLength] = useState(1);
   const [lastResponseTextLength, setLastResponseTextLength] = useState(0);
+  const [responding, setResponding] = useState(true);
 
   const initializer = useCallback(() => {
     if (
@@ -24,6 +25,7 @@ export default function Home() {
       lastResponseTextLength ===
         initializeSequence[initializeSequence.length - 1].length
     ) {
+      setResponding(false);
       return;
     }
     let newResponseText = "";
@@ -97,11 +99,38 @@ export default function Home() {
                   />
                 </div>
                 <div>
-                  <h3>{responseText}</h3>
+                  <h3>
+                    {responseText}
+                    {responding && idx == responseTextList.length - 1 ? (
+                      <span className={styles.blinkingCursor} />
+                    ) : (
+                      ""
+                    )}
+                  </h3>
                 </div>
               </div>
             );
           })}
+          <div style={{ position: "absolute", bottom: 25, width: "50vw" }}>
+            <textarea
+              rows={4}
+              style={{ width: "100%", padding: "10px", borderRadius: "6px" }}
+            />
+            <div style={{ textAlign: "right", width: "100%" }}>
+              <input
+                type="button"
+                value="最適化を実行"
+                style={{
+                  display: "block",
+                  textAlign: "right",
+                  padding: "5px",
+                  marginRight: 0,
+                  marginLeft: "auto",
+                  fontSize: "1em",
+                }}
+              />
+            </div>
+          </div>
         </div>
       </main>
     </>
