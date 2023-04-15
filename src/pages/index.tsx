@@ -130,7 +130,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.main}>
-        <div style={{ width: "60vw", paddingBottom: "10vh" }}>
+        <div style={{ minWidth: "60vw", paddingBottom: "10vh" }}>
           {dialogueList.map((dialogueElement, dialogueIdx) => {
             return (
               <div
@@ -240,7 +240,7 @@ export default function Home() {
           style={{
             position: "relative",
             bottom: "5em",
-            width: "60vw",
+            minWidth: "60vw",
           }}
         >
           <textarea
