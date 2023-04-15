@@ -159,6 +159,7 @@ export default function Home() {
                       marginRight: "10px",
                       width: "44px",
                       height: "44px",
+                      marginLeft: "8px",
                       alignItems: "center",
                       justifyContent: "center",
                       display: "flex",
@@ -186,7 +187,13 @@ export default function Home() {
                       />
                     )}
                   </div>
-                  <div style={{ fontWeight: "bold", fontSize: "1.4em" }}>
+                  <div
+                    style={{
+                      fontWeight: "bold",
+                      fontSize: "1.4em",
+                      marginLeft: "4px",
+                    }}
+                  >
                     {dialogueElement.who === "assistant" ? "Optimizer" : "User"}
                   </div>
                 </div>
