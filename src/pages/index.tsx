@@ -139,7 +139,7 @@ export default function Home() {
                   display: "flex",
                   flexDirection: "column",
                   gap: "12px",
-                  marginBottom: "10px",
+                  marginBottom: "30px",
                   marginRight: "10px",
                   padding: "12px",
                   borderRadius: "2px",
@@ -251,7 +251,7 @@ export default function Home() {
               fontSize: "1.2em",
             }}
           />
-          <div style={{ textAlign: "right", width: "100%", marginTop: "10px" }}>
+          <div style={{ textAlign: "right", width: "100%", marginTop: "20px" }}>
             <input
               type="button"
               value="最適化の支援を要求"
