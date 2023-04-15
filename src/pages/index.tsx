@@ -139,22 +139,37 @@ export default function Home() {
                   display: "flex",
                   marginBottom: "10px",
                   padding: "12px",
-                  border: "2px solid rgb(219, 219, 219)",
+                  border: "2px solid rgba(219, 219, 219, 0.8)",
                   borderRadius: "2px",
                 }}
               >
-                <div style={{ marginRight: "10px" }}>
+                <div
+                  style={{
+                    marginRight: "10px",
+                    width: "44px",
+                    height: "44px",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    display: "flex",
+                    backdropFilter: "blur(4px)",
+                    backgroundColor:
+                      dialogueElement.who === "assistant"
+                        ? "rgba(7, 180, 179, 0.6)"
+                        : "transparent",
+                  }}
+                >
                   {dialogueElement.who === "assistant" ? (
                     <img
-                      width={20}
-                      height={20}
+                      width={30}
+                      height={30}
                       src="https://i.gyazo.com/311db640f4fc0083ea572e6bb2e433d0.png"
                       alt="ai icon"
+                      style={{ display: "block" }}
                     />
                   ) : (
                     <img
-                      width={20}
-                      height={20}
+                      width={30}
+                      height={30}
                       src="https://i.gyazo.com/8960181a3459473ada71a8718df8785b.png"
                       alt="user icon"
                     />
@@ -197,9 +212,12 @@ export default function Home() {
             onChange={(e) => setInputText(e.currentTarget.value)}
             rows={4}
             style={{
+              color: "rgb(219, 219, 219)",
+              backgroundColor: "rgba(79, 79, 79, 0.8)",
+              borderRadius: "6px",
+              border: "2px solid rgba(219, 219, 219, 0.8)",
               width: "100%",
               padding: "12px 8px",
-              borderRadius: "6px",
               fontSize: "1.2em",
             }}
           />
@@ -211,14 +229,14 @@ export default function Home() {
               disabled={responding}
               style={{
                 color: "rgb(219, 219, 219)",
-                background: "rgb(7, 180, 179)",
-                border: "2px solid white",
+                backgroundColor: "rgba(7, 180, 179, 0.6)",
+                border: "2px solid rgba(219, 219, 219, 0.8)",
                 display: "block",
                 textAlign: "right",
-                padding: "5px",
+                padding: "8px",
                 marginRight: 0,
                 marginLeft: "auto",
-                fontSize: "1em",
+                fontSize: "1.1em",
               }}
             />
           </div>
