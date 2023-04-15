@@ -111,7 +111,7 @@ export default function Home() {
       {
         who: "assistant",
         text:
-          "あたたの状況を改善し社会を最適化させるために、以下の制度が有用であると推測しました。\n" +
+          "あなたの状況を改善し社会を最適化させるために、以下の制度が活用できるかもしれません。\n" +
           systemTitles,
       },
     ];
