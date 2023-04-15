@@ -137,48 +137,70 @@ export default function Home() {
                 key={dialogueIdx}
                 style={{
                   display: "flex",
+                  flexDirection: "column",
+                  gap: "12px",
                   marginBottom: "10px",
+                  marginRight: "10px",
                   padding: "12px",
-                  border: "2px solid rgba(219, 219, 219, 0.8)",
                   borderRadius: "2px",
+                  border: "2px solid rgba(219, 219, 219, 0.8)",
+                  boxShadow: "0 2px 6px 0 rgba(219, 219, 219, .3)",
                 }}
               >
                 <div
                   style={{
-                    marginRight: "10px",
-                    width: "44px",
-                    height: "44px",
-                    alignItems: "center",
-                    justifyContent: "center",
                     display: "flex",
-                    backdropFilter: "blur(4px)",
-                    backgroundColor:
-                      dialogueElement.who === "assistant"
-                        ? "rgba(7, 180, 179, 0.6)"
-                        : "transparent",
+                    justifyItems: "center",
+                    alignItems: "center",
                   }}
                 >
-                  {dialogueElement.who === "assistant" ? (
-                    <img
-                      width={30}
-                      height={30}
-                      src="https://i.gyazo.com/311db640f4fc0083ea572e6bb2e433d0.png"
-                      alt="ai icon"
-                      style={{ display: "block" }}
-                    />
-                  ) : (
-                    <img
-                      width={30}
-                      height={30}
-                      src="https://i.gyazo.com/8960181a3459473ada71a8718df8785b.png"
-                      alt="user icon"
-                    />
-                  )}
+                  <div
+                    style={{
+                      marginRight: "10px",
+                      width: "44px",
+                      height: "44px",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      display: "flex",
+                      backdropFilter: "blur(4px)",
+                      backgroundColor:
+                        dialogueElement.who === "assistant"
+                          ? "rgba(7, 180, 179, 0.6)"
+                          : "rgba(0, 0, 0, 0.3)",
+                    }}
+                  >
+                    {dialogueElement.who === "assistant" ? (
+                      <img
+                        width={30}
+                        height={30}
+                        src="https://i.gyazo.com/311db640f4fc0083ea572e6bb2e433d0.png"
+                        alt="ai icon"
+                        style={{ display: "block" }}
+                      />
+                    ) : (
+                      <img
+                        width={30}
+                        height={30}
+                        src="https://i.gyazo.com/8960181a3459473ada71a8718df8785b.png"
+                        alt="user icon"
+                      />
+                    )}
+                  </div>
+                  <div style={{ fontWeight: "bold", fontSize: "1.4em" }}>
+                    {dialogueElement.who === "assistant" ? "Optimizer" : "User"}
+                  </div>
                 </div>
+                <div
+                  style={{
+                    borderBottom: "2px solid rgba(219, 219, 219, 0.8)",
+                    boxShadow: "0 2px 6px 0 rgba(219, 219, 219, .3)",
+                  }}
+                />
                 <div
                   style={{
                     fontWeight: "bold",
                     fontSize: "1.2em",
+                    paddingLeft: "66px",
                   }}
                 >
                   {dialogueElement.text.split("\n").map((row, rowIdx) => {
@@ -216,6 +238,7 @@ export default function Home() {
               backgroundColor: "rgba(79, 79, 79, 0.8)",
               borderRadius: "6px",
               border: "2px solid rgba(219, 219, 219, 0.8)",
+              boxShadow: "0 2px 6px 0 rgba(219, 219, 219, .3)",
               width: "100%",
               padding: "12px 8px",
               fontSize: "1.2em",
@@ -229,8 +252,9 @@ export default function Home() {
               disabled={responding}
               style={{
                 color: "rgb(219, 219, 219)",
-                backgroundColor: "rgba(7, 180, 179, 0.6)",
-                border: "2px solid rgba(219, 219, 219, 0.8)",
+                backgroundColor: "rgba(7, 180, 180, 0.6)",
+                border: "2px solid rgba(7, 180, 180, 0.8)",
+                boxShadow: "0 2px 6px 0 rgba(7, 180, 180, .3)",
                 display: "block",
                 textAlign: "right",
                 padding: "8px",

@@ -19,9 +19,9 @@
   height: 1.17em;
   margin-top: 4px;
   margin-left: 4px;
-  background: black;
+  background: rgba(7, 180, 180, 1);
   display: inline-block;
-  animation: cursor-blink 0.5s steps(2) infinite;
+  animation: cursor-blink 0.2s steps(2) infinite;
 }
 
 .description {
