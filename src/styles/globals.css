@@ -239,7 +239,7 @@ input[type="button"]:disabled {
   position: absolute;
   top: -5vh;
   left: -5vh;
-  right: 0;
+  right: -5vh;
   margin-left: auto;
   margin-right: auto;
   width: 110vh;
