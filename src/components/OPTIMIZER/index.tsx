@@ -90,7 +90,6 @@ export const OPTIMIZER: React.FC = () => {
       { who: "user", text: inputText },
     ];
     setDialogueList(newDialogueListWithUser);
-    setResponding(false);
     const res = await nextJsonPost("/api/search", { query: newInputText });
     const json = await res.json();
     console.log(json);
@@ -117,6 +116,7 @@ export const OPTIMIZER: React.FC = () => {
       },
     ];
     setDialogueList(newDialogueListWithUserAndAssistant);
+    setResponding(false);
   }, [inputText, dialogueList]);
 
   return (
