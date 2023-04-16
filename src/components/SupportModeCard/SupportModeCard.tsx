@@ -32,7 +32,7 @@ export const SupportModeCard: React.FC = () => {
         transform:
           "perspective(300px) rotateX(-5deg) rotateY(-15deg) rotateZ(-10deg)",
       }}
-      className="borderBottomLoop"
+      className="optimizerStatus"
     >
       <div
         style={{
