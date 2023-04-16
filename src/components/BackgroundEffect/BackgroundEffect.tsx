@@ -7,6 +7,11 @@ export const BackgroundEffect: React.FC = () => {
         width: "100vw",
         height: "100vh",
         overflow: "hidden",
+        //backgroundImage:
+        //  "url(https://i.gyazo.com/18accaef60cd032294bb594f5cdc9ac3.jpg)",
+        //backgroundSize: "cover",
+        //backgroundPosition: "center",
+        //backgroundRepeat: "no-repeat",
       }}
     >
       <div className="backgroundEffectInnerCircle" />
