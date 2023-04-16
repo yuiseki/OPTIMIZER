@@ -40,6 +40,7 @@ export const CircleClock: React.FC = () => {
           fontWeight: "bold",
           fontSize: "1.1em",
           flex: "0 0 40px",
+          textShadow: "0 0 2px rgba(255, 255, 255, 1)",
         }}
       >
         {now.toLocaleDateString()}
@@ -49,6 +50,7 @@ export const CircleClock: React.FC = () => {
           fontWeight: "bold",
           fontSize: "1.1em",
           flex: "0 0 40px",
+          textShadow: "0 0 2px rgba(255, 255, 255, 1)",
         }}
       >
         {now.toLocaleTimeString()}
@@ -58,6 +60,7 @@ export const CircleClock: React.FC = () => {
           fontWeight: "bold",
           fontSize: "1.1em",
           flex: "0 0 40px",
+          textShadow: "0 0 2px rgba(255, 255, 255, 1)",
         }}
       >
         {now.getTime()}
