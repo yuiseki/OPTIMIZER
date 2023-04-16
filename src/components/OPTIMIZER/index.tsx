@@ -111,7 +111,7 @@ export const OPTIMIZER: React.FC = () => {
       {
         who: "assistant",
         text:
-          "あなたの状況を改善し、社会を最適化するために、以下の制度を活用することを検討してください。\n\n" +
+          "あなたの状況を改善するために、以下の制度を活用することを検討してください。\n\n" +
           systemTitles,
       },
     ];
