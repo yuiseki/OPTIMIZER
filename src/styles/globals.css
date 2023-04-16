@@ -160,7 +160,7 @@ a {
   left: 50%;
   transform: translateX(-50%);
   color: gray;
-  opacity: 0.8;
+  opacity: 0.4;
   font-size: 1em;
   content: "8888-88-88";
   z-index: -1;
@@ -178,7 +178,7 @@ a {
   left: 50%;
   transform: translateX(-50%);
   color: gray;
-  opacity: 0.8;
+  opacity: 0.4;
   font-size: 1em;
   content: "88:88:88";
   z-index: -1;
@@ -196,7 +196,7 @@ a {
   left: 50%;
   transform: translateX(-50%);
   color: gray;
-  opacity: 0.8;
+  opacity: 0.4;
   font-size: 1em;
   content: "8888888888888";
   z-index: -1;
