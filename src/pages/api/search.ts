@@ -37,6 +37,6 @@ export default async function handler(
   const directory = path.resolve("public", "vector_store");
   const vectorStore = await HNSWLib.load(directory, new OpenAIEmbeddings());
 
-  const results = await vectorStore.similaritySearchWithScore(queryString, 5);
+  const results = await vectorStore.similaritySearchWithScore(queryString, 10);
   res.status(200).json(results);
 }

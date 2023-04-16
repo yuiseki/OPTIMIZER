@@ -95,6 +95,7 @@ export const OPTIMIZER: React.FC = () => {
     const json = await res.json();
     console.log(json);
     const systemTitles: string = json
+      .slice(0, 6)
       .map((system: [{ metadata: any; pageContent: string }, number]) => {
         return (
           "- " +
