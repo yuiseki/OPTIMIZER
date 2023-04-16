@@ -233,14 +233,45 @@ input[type="button"]:disabled {
   margin-right: auto;
   width: 90vh;
   height: 90vh;
-  border: 4px dashed rgba(255, 255, 255, 0.4);
+  border: 2px dashed rgba(255, 255, 255, 0.4);
   border-radius: 90vh;
   animation: spin 90s linear infinite;
   z-index: -1;
 }
 
-.backgroundEffectOuterCircle {
+.backgroundEffectInnerCircleOuter {
   position: absolute;
+  top: 4vh;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  width: 92vh;
+  height: 92vh;
+  border: 8px dashed rgba(255, 255, 255, 0.4);
+  border-radius: 92vh;
+  animation: spin 90s linear infinite;
+  z-index: -1;
+}
+
+.backgroundEffectOuterCircleInner {
+  content: "";
+  position: absolute;
+  top: -4vh;
+  left: -4vh;
+  right: -4vh;
+  margin-left: auto;
+  margin-right: auto;
+  width: 108vh;
+  height: 108vh;
+  border: 2vh dashed rgba(60, 191, 204, 0.4);
+  border-radius: 108vh;
+  animation: spin-reverse 60s linear infinite;
+  z-index: -1;
+}
+
+.backgroundEffectOuterCircle {
+  position: relative;
   top: -5vh;
   left: -5vh;
   right: -5vh;
@@ -248,7 +279,7 @@ input[type="button"]:disabled {
   margin-right: auto;
   width: 110vh;
   height: 110vh;
-  border: 8px dashed rgba(60, 191, 204, 0.4);
+  border: 12px dashed rgba(60, 191, 204, 0.4);
   border-radius: 110vh;
   animation: spin-reverse 60s linear infinite;
   z-index: -1;

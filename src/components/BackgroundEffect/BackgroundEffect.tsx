@@ -15,6 +15,8 @@ export const BackgroundEffect: React.FC = () => {
       }}
     >
       <div className="backgroundEffectInnerCircle" />
+      <div className="backgroundEffectInnerCircleOuter" />
+      <div className="backgroundEffectOuterCircleInner" />
       <div className="backgroundEffectOuterCircle" />
     </div>
   );
