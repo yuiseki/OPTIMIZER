@@ -14,7 +14,7 @@ export default function Home() {
         <title>対話型制度探索社会最適化支援システム オプティマイザー</title>
         <meta
           name="description"
-          content="対話型制度探索社会最適化支援システム オプティマイザー"
+          content="対話型制度探索社会最適化支援システム オプティマイザー 起動しました。 落ち着いて状況を整理し、あなたの抱えている困り事や悩み事を、具体的かつ簡潔に入力してください。"
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
