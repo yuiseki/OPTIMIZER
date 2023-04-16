@@ -244,7 +244,7 @@ input[type="button"]:disabled {
   margin-right: auto;
   width: 110vh;
   height: 110vh;
-  border: 8px dashed rgba(255, 255, 255, 0.4);
+  border: 8px dashed rgba(60, 191, 204, 0.5);
   border-radius: 110vh;
   animation: spin 60s linear infinite;
   z-index: -1;
