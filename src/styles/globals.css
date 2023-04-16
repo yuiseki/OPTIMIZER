@@ -214,7 +214,10 @@ a {
 .backgroundEffectInnerCircle {
   position: absolute;
   top: 5vh;
-  left: calc(25vw + 14px);
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
   width: 90vh;
   height: 90vh;
   border: 4px dotted rgba(255, 255, 255, 0.6);
@@ -226,7 +229,10 @@ a {
 .backgroundEffectOuterCircle {
   position: absolute;
   top: 3vh;
-  left: calc(25vw - 6px);
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
   width: 94vh;
   height: 94vh;
   border: 6px dashed rgba(255, 255, 255, 0.4);
