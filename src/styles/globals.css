@@ -105,3 +105,40 @@ a {
     color-scheme: dark;
   }
 }
+
+@keyframes border-bottom-loop {
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+.borderBottomLoop::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 0;
+  transform: translateX(-50%);
+  border-bottom: solid 4px rgb(60, 191, 204, 0.8);
+  animation: border-bottom-loop 5s linear infinite;
+}
+
+@keyframes cursor-blink {
+  0% {
+    opacity: 0;
+  }
+}
+
+.blinkingCursor::after {
+  content: "";
+  width: 10px;
+  height: 1.17em;
+  margin-top: 4px;
+  margin-left: 4px;
+  background: rgba(7, 180, 180, 1);
+  display: inline-block;
+  animation: cursor-blink 0.2s steps(2) infinite;
+}

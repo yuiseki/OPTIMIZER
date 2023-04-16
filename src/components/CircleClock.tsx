@@ -32,7 +32,7 @@ export const CircleClock: React.FC = () => {
         boxShadow: "0 2px 6px 0 rgba(219, 219, 219, 0.2)",
         backgroundColor: "rgba(79, 79, 79, 0.8)",
         opacity: "0.8",
-        transform: "perspective(250px) rotateX(10deg) rotateY(-20deg)",
+        transform: "perspective(250px) rotateX(5deg) rotateY(-15deg)",
       }}
     >
       <div
