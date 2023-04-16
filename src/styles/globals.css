@@ -150,7 +150,7 @@ a {
 
 .circleClockDate {
   position: relative;
-  text-shadow: 0 0 1px rgba(255, 255, 255, 1);
+  text-shadow: 0 0 0.5px rgba(255, 255, 255, 1);
 }
 
 .circleClockDate::after {
@@ -168,7 +168,7 @@ a {
 
 .circleClockTime {
   position: relative;
-  text-shadow: 0 0 1px rgba(255, 255, 255, 1);
+  text-shadow: 0 0 0.5px rgba(255, 255, 255, 1);
 }
 
 .circleClockTime::after {
@@ -187,7 +187,7 @@ a {
 .circleClockUnixTime {
   position: relative;
   white-space: nowrap;
-  text-shadow: 0 0 1px rgba(255, 255, 255, 1);
+  text-shadow: 0 0 0.5px rgba(255, 255, 255, 1);
 }
 
 .circleClockUnixTime::after {

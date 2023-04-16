@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import Head from "next/head";
+
 import styles from "@/styles/Home.module.css";
 import { useCallback, useEffect, useState } from "react";
 import { nextJsonPost } from "@/lib/nextJsonPost";
@@ -15,7 +15,7 @@ const initializeSequence = [
   ユーザーの入力を待機しています…`,
 ];
 
-export const OPTIMIZER = () => {
+export const OPTIMIZER: React.FC = () => {
   const [dialogueList, setDialogueList] = useState<
     {
       who: string;
