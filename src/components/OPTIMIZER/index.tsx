@@ -142,7 +142,7 @@ export const OPTIMIZER: React.FC = () => {
                   borderRadius: "2px",
                   border: "2px solid rgba(219, 219, 219, 0.8)",
                   boxShadow: "0 2px 6px 0 rgba(219, 219, 219, 0.3)",
-                  backgroundColor: "rgba(79, 79, 79, 0.8)",
+                  backgroundColor: "rgba(79, 79, 79, 0.9)",
                 }}
               >
                 <div
