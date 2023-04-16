@@ -4,7 +4,7 @@ export const SupportModeCard: React.FC = () => {
   const [isMobile, setIsMobile] = useState(true);
 
   useEffect(() => {
-    setIsMobile(window.matchMedia("(max-width: 600px)").matches);
+    setIsMobile(window.matchMedia("(max-width: 1000px)").matches);
   }, []);
 
   if (isMobile) {

@@ -8,7 +8,7 @@ export const CircleClock: React.FC = () => {
     setInterval(() => {
       setNow(new Date());
     }, 100);
-    setIsMobile(window.matchMedia("(max-width: 600px)").matches);
+    setIsMobile(window.matchMedia("(max-width: 1000px)").matches);
   }, []);
 
   if (isMobile) {
