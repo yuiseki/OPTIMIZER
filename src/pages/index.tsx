@@ -4,6 +4,15 @@ import styles from "@/styles/Home.module.css";
 import { useCallback, useEffect, useState } from "react";
 import { nextJsonPost } from "@/lib/nextJsonPost";
 
+import dynamic from "next/dynamic";
+
+const CircleClock = dynamic(
+  () => import("@/components/CircleClock").then((module) => module.CircleClock),
+  {
+    ssr: false,
+  }
+);
+
 const initializeSequence = [
   `対話型制度探索社会最適化支援システム。
   オプティマイザー、起動しました。
@@ -129,6 +138,7 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <CircleClock />
       <main className={styles.main}>
         <div style={{ width: "100%", paddingBottom: "10vh" }}>
           {dialogueList.map((dialogueElement, dialogueIdx) => {
