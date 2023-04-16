@@ -166,15 +166,15 @@ export default function Home() {
                       backdropFilter: "blur(4px)",
                       backgroundColor:
                         dialogueElement.who === "assistant"
-                          ? "rgba(7, 180, 180, 0.6)"
+                          ? "rgba(5, 251, 255, 0.8)"
                           : "rgba(0, 0, 0, 0.5)",
                       border:
                         dialogueElement.who === "assistant"
-                          ? "2px solid rgba(7, 180, 180, 888)"
+                          ? "2px solid rgba(5, 251, 255, 0.6)"
                           : "2px solid rgba(0, 0, 0, 0.1)",
                       boxShadow:
                         dialogueElement.who === "assistant"
-                          ? "0 2px 6px 0 rgba(7, 180, 180, 0.4)"
+                          ? "0 2px 6px 0 rgba(5, 251, 255, 0.6)"
                           : "0 2px 6px 0 rgba(0, 0, 0, 0.3)",
                     }}
                   >
@@ -265,16 +265,18 @@ export default function Home() {
               onClick={submit}
               disabled={responding}
               style={{
-                color: "rgb(219, 219, 219)",
-                backgroundColor: "rgba(7, 180, 180, 0.6)",
-                border: "2px solid rgba(7, 180, 180, 0.8)",
-                boxShadow: "0 2px 6px 0 rgba(7, 180, 180, 0.4)",
+                color: "rgb(253, 254, 255)",
+                backgroundColor: "rgba(5, 251, 255, 0.8)",
+                border: "2px solid rgba(5, 251, 255, 0.8)",
+                boxShadow: "0 2px 6px 0 rgba(5, 251, 255, 0.8)",
                 display: "block",
                 textAlign: "right",
                 padding: "8px",
                 marginRight: 0,
                 marginLeft: "auto",
                 fontSize: "1.1em",
+                fontWeight: "bold",
+                letterSpacing: "2px",
               }}
             />
           </div>
