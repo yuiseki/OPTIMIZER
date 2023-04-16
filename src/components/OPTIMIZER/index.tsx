@@ -102,6 +102,12 @@ export const OPTIMIZER: React.FC = () => {
     ];
     setDialogueList(newDialogueListWithUser);
     await scrollToBottom();
+    const newDialogueListWithUserAndAssistant = [
+      ...newDialogueListWithUser,
+      { who: "assistant", text: "最適解を計算しています…" },
+    ];
+    setDialogueList(newDialogueListWithUserAndAssistant);
+    await scrollToBottom();
     await sleep(500);
     const res = await nextJsonPost("/api/search", { query: newInputText });
     const json = await res.json();
@@ -119,8 +125,8 @@ export const OPTIMIZER: React.FC = () => {
       })
       .join("\n");
     console.log(systemTitles);
-    const newDialogueListWithUserAndAssistant = [
-      ...newDialogueListWithUser,
+    const newDialogueListWithUserAndAssistantAndResponse = [
+      ...newDialogueListWithUserAndAssistant,
       {
         who: "assistant",
         text:
@@ -128,7 +134,7 @@ export const OPTIMIZER: React.FC = () => {
           systemTitles,
       },
     ];
-    setDialogueList(newDialogueListWithUserAndAssistant);
+    setDialogueList(newDialogueListWithUserAndAssistantAndResponse);
     setResponding(false);
     await scrollToBottom();
   }, [inputText, dialogueList]);
