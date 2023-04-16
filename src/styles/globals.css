@@ -271,7 +271,7 @@ input[type="button"]:disabled {
 }
 
 .backgroundEffectOuterCircle {
-  position: relative;
+  position: absolute;
   top: -5vh;
   left: -5vh;
   right: -5vh;
