@@ -18,7 +18,7 @@ export const SupportModeCard: React.FC = () => {
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
-        position: "absolute",
+        position: "fixed",
         top: 50,
         right: 50,
         width: "300px",
@@ -28,7 +28,8 @@ export const SupportModeCard: React.FC = () => {
         boxShadow: "0 2px 6px 0 rgba(219, 219, 219, 0.2)",
         backgroundColor: "rgba(79, 79, 79, 0.8)",
         opacity: "0.9",
-        transform: "perspective(300px) rotateX(-5deg) rotateY(-15deg) rotateZ(-10deg)",
+        transform:
+          "perspective(300px) rotateX(-5deg) rotateY(-15deg) rotateZ(-10deg)",
       }}
     >
       <div

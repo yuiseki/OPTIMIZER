@@ -6,7 +6,7 @@ export const UserInfoCard: React.FC = () => {
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
-        position: "absolute",
+        position: "fixed",
         bottom: 50,
         right: 50,
         width: "300px",

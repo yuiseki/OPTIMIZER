@@ -23,7 +23,7 @@ export const CircleClock: React.FC = () => {
         justifyContent: "center",
         alignItems: "center",
         gap: "6px",
-        position: "absolute",
+        position: "fixed",
         top: 180,
         right: 50,
         width: "160px",

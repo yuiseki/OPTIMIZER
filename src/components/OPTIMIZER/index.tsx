@@ -111,18 +111,24 @@ export const OPTIMIZER: React.FC = () => {
       {
         who: "assistant",
         text:
-          "あなたの状況を改善し、社会を最適化するために、以下の制度を活用することを検討してください。\n" +
+          "あなたの状況を改善し、社会を最適化するために、以下の制度を活用することを検討してください。\n\n" +
           systemTitles,
       },
     ];
     setDialogueList(newDialogueListWithUserAndAssistant);
     setResponding(false);
+    setTimeout(() => {
+      window.scroll({
+        top: document.body.scrollHeight,
+        behavior: "smooth",
+      });
+    }, 200);
   }, [inputText, dialogueList]);
 
   return (
     <>
       <main className={styles.main}>
-        <div style={{ width: "100%", paddingBottom: "10vh" }}>
+        <div style={{ width: "100%", marginBottom: "15em" }}>
           {dialogueList.map((dialogueElement, dialogueIdx) => {
             return (
               <div
@@ -229,7 +235,7 @@ export const OPTIMIZER: React.FC = () => {
         </div>
         <div
           style={{
-            position: "relative",
+            position: "absolute",
             bottom: "5em",
             width: "100%",
           }}
