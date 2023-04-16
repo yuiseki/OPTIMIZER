@@ -22,8 +22,8 @@ export const SupportModeCard: React.FC = () => {
         top: 50,
         right: 10,
         gap: "2px",
-        width: "300px",
-        height: "210px",
+        width: "340px",
+        height: "260px",
         borderRadius: "2px",
         border: "2px solid rgba(219, 219, 219, 0.2)",
         boxShadow: "0 2px 6px 0 rgba(219, 219, 219, 0.2)",
@@ -48,7 +48,7 @@ export const SupportModeCard: React.FC = () => {
         OPTIMIZER
       </div>
       <div
-        style={{ fontSize: "4px", paddingLeft: "30px", paddingRight: "30px" }}
+        style={{ fontSize: "12px", paddingLeft: "30px", paddingRight: "30px" }}
       >
         An interactive welfare program exploration and social optimization
         support system.
@@ -82,6 +82,17 @@ export const SupportModeCard: React.FC = () => {
       </div>
       <div
         style={{
+          width: "100%",
+          fontSize: "12px",
+          textAlign: "left",
+          paddingLeft: "30px",
+          paddingRight: "30px",
+        }}
+      >
+        Embedding Model: `text-embedding-ada-002`
+      </div>
+      <div
+        style={{
           fontWeight: "normal",
           fontSize: "1.2em",
           opacity: "0.9",
@@ -106,6 +117,17 @@ export const SupportModeCard: React.FC = () => {
         }}
       >
         GOAL-SEEK EXPLORER
+      </div>
+      <div
+        style={{
+          width: "100%",
+          fontSize: "12px",
+          textAlign: "left",
+          paddingLeft: "30px",
+          paddingRight: "30px",
+        }}
+      >
+        Vectorized welfare programs: 323
       </div>
     </div>
   );
