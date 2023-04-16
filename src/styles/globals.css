@@ -201,3 +201,36 @@ a {
   content: "8888888888888";
   z-index: -1;
 }
+
+@keyframes spin {
+  from {
+    transform: translate(0, 0) rotate(0);
+  }
+  to {
+    transform: translate(0, 0) rotate(360deg);
+  }
+}
+
+.backgroundEffectInnerCircle {
+  position: absolute;
+  top: 5vh;
+  left: calc(25vw + 14px);
+  width: 90vh;
+  height: 90vh;
+  border: 4px dotted rgba(255, 255, 255, 0.6);
+  border-radius: 90vh;
+  animation: spin 5s linear infinite;
+  z-index: -1;
+}
+
+.backgroundEffectOuterCircle {
+  position: absolute;
+  top: 3vh;
+  left: calc(25vw - 6px);
+  width: 94vh;
+  height: 94vh;
+  border: 6px dashed rgba(255, 255, 255, 0.4);
+  border-radius: 94vh;
+  animation: spin 60s linear infinite;
+  z-index: -1;
+}

@@ -6,6 +6,7 @@ import { nextJsonPost } from "@/lib/nextJsonPost";
 
 import dynamic from "next/dynamic";
 import { SupportModeCard } from "@/components/SupportModeCard";
+import { BackgroundEffect } from "@/components/BackgroundEffect";
 
 const CircleClock = dynamic(
   () => import("@/components/CircleClock").then((module) => module.CircleClock),
@@ -139,6 +140,7 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <BackgroundEffect />
       <SupportModeCard />
       <CircleClock />
       <main className={styles.main}>
