@@ -1,16 +1,4 @@
-import { useEffect, useState } from "react";
-
-export const SupportModeCard: React.FC = () => {
-  const [isMobile, setIsMobile] = useState(true);
-
-  useEffect(() => {
-    setIsMobile(window.matchMedia("(max-width: 1000px)").matches);
-  }, []);
-
-  if (isMobile) {
-    return null;
-  }
-
+export const UserInfoCard: React.FC = () => {
   return (
     <div
       style={{
@@ -19,7 +7,7 @@ export const SupportModeCard: React.FC = () => {
         justifyContent: "center",
         alignItems: "center",
         position: "absolute",
-        top: 50,
+        bottom: 50,
         right: 50,
         width: "300px",
         height: "120px",
@@ -28,7 +16,8 @@ export const SupportModeCard: React.FC = () => {
         boxShadow: "0 2px 6px 0 rgba(219, 219, 219, 0.2)",
         backgroundColor: "rgba(79, 79, 79, 0.8)",
         opacity: "0.9",
-        transform: "perspective(300px) rotateX(-5deg) rotateY(-15deg) rotateZ(-10deg)",
+        transform:
+          "perspective(300px) rotateX(10deg) rotateY(-20deg) rotateZ(10deg)",
       }}
     >
       <div
@@ -42,7 +31,7 @@ export const SupportModeCard: React.FC = () => {
           textShadow: "0 0 2px rgba(255, 255, 255, 1)",
         }}
       >
-        OPTIMIZER
+        USER
       </div>
       <div
         style={{
@@ -52,25 +41,11 @@ export const SupportModeCard: React.FC = () => {
           width: "100%",
           textAlign: "left",
           paddingLeft: "30px",
-          textShadow: "0 0 2px rgba(255, 255, 255, 1)",
-        }}
-      >
-        SUPPORT MODE:
-      </div>
-      <div
-        className="borderBottomLoop"
-        style={{
-          fontWeight: "bold",
-          fontSize: "1.2em",
-          opacity: "0.9",
           textShadow: "0 0 4px rgba(60, 191, 204, 1)",
           color: "rgb(60, 191, 204)",
-          width: "100%",
-          textAlign: "left",
-          paddingLeft: "30px",
         }}
       >
-        GOAL-SEEK EXPLORER
+        PERMISSION VALIDATED
       </div>
     </div>
   );

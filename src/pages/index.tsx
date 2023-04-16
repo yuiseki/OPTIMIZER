@@ -5,6 +5,7 @@ import { SupportModeCard } from "@/components/SupportModeCard";
 import { BackgroundEffect } from "@/components/BackgroundEffect";
 import { CircleClock } from "@/components/CircleClock";
 import { OPTIMIZER } from "@/components/OPTIMIZER";
+import { UserInfoCard } from "@/components/UserInfoCard";
 
 export default function Home() {
   return (
@@ -21,6 +22,7 @@ export default function Home() {
       <OPTIMIZER />
       <SupportModeCard />
       <CircleClock />
+      <UserInfoCard />
       <BackgroundEffect />
     </>
   );
