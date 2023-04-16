@@ -192,7 +192,7 @@ export const OPTIMIZER: React.FC = () => {
                       marginLeft: "4px",
                     }}
                   >
-                    {dialogueElement.who === "assistant" ? "OPTIMIZER" : "User"}
+                    {dialogueElement.who === "assistant" ? "OPTIMIZER" : "USER"}
                   </div>
                 </div>
                 <div
