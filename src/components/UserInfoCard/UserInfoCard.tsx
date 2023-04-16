@@ -1,4 +1,16 @@
+import { useEffect, useState } from "react";
+
 export const UserInfoCard: React.FC = () => {
+  const [isMobile, setIsMobile] = useState(true);
+
+  useEffect(() => {
+    setIsMobile(window.matchMedia("(max-width: 1000px)").matches);
+  }, []);
+
+  if (isMobile) {
+    return null;
+  }
+
   return (
     <div
       style={{
