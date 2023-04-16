@@ -102,9 +102,10 @@ export const OPTIMIZER: React.FC = () => {
     ];
     setDialogueList(newDialogueListWithUser);
     await scrollToBottom();
+    await sleep(100);
     const newDialogueListWithUserAndAssistant = [
       ...newDialogueListWithUser,
-      { who: "assistant", text: "社会の最適解を計算しています…" },
+      { who: "assistant", text: "入力に基づき、社会の最適化を計算しています…" },
     ];
     setDialogueList(newDialogueListWithUserAndAssistant);
     await scrollToBottom();
