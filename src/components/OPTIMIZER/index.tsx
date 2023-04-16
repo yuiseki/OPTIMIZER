@@ -236,13 +236,13 @@ export const OPTIMIZER: React.FC = () => {
         >
           <textarea
             value={inputText}
-            placeholder="災害で家が全壊しました"
+            placeholder={responding ? "..." : "災害で家が全壊しました"}
             onChange={(e) => setInputText(e.currentTarget.value)}
             rows={4}
             style={{
               color: "rgb(219, 219, 219)",
-              backgroundColor: "rgba(79, 79, 79, 0.8)",
-              borderRadius: "6px",
+              backgroundColor: "rgba(79, 79, 79, 0.9)",
+              borderRadius: "2px",
               border: "2px solid rgba(219, 219, 219, 0.8)",
               boxShadow: "0 2px 6px 0 rgba(219, 219, 219, 0.3)",
               width: "100%",
@@ -260,6 +260,7 @@ export const OPTIMIZER: React.FC = () => {
                 color: "rgb(253, 254, 255)",
                 backgroundColor: "rgba(5, 251, 255, 0.8)",
                 border: "2px solid rgba(5, 251, 255, 0.8)",
+                borderRadius: "2px",
                 boxShadow: "0 2px 6px 0 rgba(5, 251, 255, 0.8)",
                 display: "block",
                 textAlign: "right",

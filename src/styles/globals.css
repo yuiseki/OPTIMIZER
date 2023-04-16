@@ -111,6 +111,15 @@ a {
   src: url("/fonts/DSEG7Modern-Regular.ttf") format("woff");
 }
 
+textarea:disabled {
+  opacity: 0.4;
+}
+
+input[type="button"]:disabled {
+  opacity: 0.4;
+  background-color: rgba(5, 251, 255, 0.4) !important;
+}
+
 @keyframes border-bottom-loop {
   0% {
     width: 0%;
