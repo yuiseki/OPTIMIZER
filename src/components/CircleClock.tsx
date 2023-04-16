@@ -25,45 +25,43 @@ export const CircleClock: React.FC = () => {
         position: "absolute",
         bottom: 50,
         right: 50,
-        width: "200px",
-        height: "200px",
-        borderRadius: "250px",
+        width: "220px",
+        height: "220px",
+        borderRadius: "220px",
         border: "2px solid rgba(219, 219, 219, 0.2)",
         boxShadow: "0 2px 6px 0 rgba(219, 219, 219, 0.2)",
         backgroundColor: "rgba(79, 79, 79, 0.8)",
         opacity: "0.8",
         transform: "perspective(250px) rotateX(5deg) rotateY(-15deg)",
+        fontFamily: "D7MR",
+        fontSize: "1em",
+        fontWeight: "bold",
       }}
     >
       <div
         style={{
-          fontWeight: "bold",
-          fontSize: "1.1em",
           flex: "0 0 40px",
-          textShadow: "0 0 2px rgba(255, 255, 255, 1)",
         }}
       >
-        {now.toLocaleDateString()}
+        <span className="circleClockDate">{`${now.getFullYear()}-${(
+          now.getMonth() + 1
+        )
+          .toString()
+          .padStart(2, "0")}-${now.getDate()}`}</span>
       </div>
       <div
         style={{
-          fontWeight: "bold",
-          fontSize: "1.1em",
           flex: "0 0 40px",
-          textShadow: "0 0 2px rgba(255, 255, 255, 1)",
         }}
       >
-        {now.toLocaleTimeString()}
+        <span className="circleClockTime">{now.toLocaleTimeString()}</span>
       </div>
       <div
         style={{
-          fontWeight: "bold",
-          fontSize: "1.1em",
           flex: "0 0 40px",
-          textShadow: "0 0 2px rgba(255, 255, 255, 1)",
         }}
       >
-        {now.getTime()}
+        <span className="circleClockUnixTime">{now.getTime()}</span>
       </div>
     </div>
   );
