@@ -237,7 +237,7 @@ export default function Home() {
                           dialogueIdx === dialogueList.length - 1 &&
                           rowIdx ===
                             dialogueElement.text.split("\n").length - 1 && (
-                            <span className={styles.blinkingCursor} />
+                            <span className="blinkingCursor" />
                           )}
                       </div>
                     );
