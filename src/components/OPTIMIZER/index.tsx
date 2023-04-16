@@ -15,6 +15,17 @@ const initializeSequence = [
   ユーザーの入力を待機しています…`,
 ];
 
+const sleep = (msec: number) =>
+  new Promise((resolve) => setTimeout(resolve, msec));
+
+const scrollToBottom = async () => {
+  await sleep(100);
+  window.scroll({
+    top: document.body.scrollHeight,
+    behavior: "smooth",
+  });
+};
+
 export const OPTIMIZER: React.FC = () => {
   const [dialogueList, setDialogueList] = useState<
     {
@@ -90,6 +101,8 @@ export const OPTIMIZER: React.FC = () => {
       { who: "user", text: inputText },
     ];
     setDialogueList(newDialogueListWithUser);
+    await scrollToBottom();
+    await sleep(500);
     const res = await nextJsonPost("/api/search", { query: newInputText });
     const json = await res.json();
     console.log(json);
@@ -117,12 +130,7 @@ export const OPTIMIZER: React.FC = () => {
     ];
     setDialogueList(newDialogueListWithUserAndAssistant);
     setResponding(false);
-    setTimeout(() => {
-      window.scroll({
-        top: document.body.scrollHeight,
-        behavior: "smooth",
-      });
-    }, 200);
+    await scrollToBottom();
   }, [inputText, dialogueList]);
 
   return (
