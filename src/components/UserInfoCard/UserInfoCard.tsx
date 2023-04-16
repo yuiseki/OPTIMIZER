@@ -45,6 +45,20 @@ export const UserInfoCard: React.FC = () => {
           color: "rgb(60, 191, 204)",
         }}
       >
+        AUTHENTICATED
+      </div>
+      <div
+        style={{
+          fontWeight: "normal",
+          fontSize: "1.2em",
+          opacity: "0.9",
+          width: "100%",
+          textAlign: "left",
+          paddingLeft: "30px",
+          textShadow: "0 0 4px rgba(60, 191, 204, 1)",
+          color: "rgb(60, 191, 204)",
+        }}
+      >
         PERMISSION VALIDATED
       </div>
     </div>
