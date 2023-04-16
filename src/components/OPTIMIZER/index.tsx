@@ -13,7 +13,10 @@ const initializeSequence = [
   適正ユーザーです。
 
   支援モード、ゴールシーク・エクスプローラー。
-  落ち着いて状況を整理し、あなたの抱える困り事または悩み事を、簡潔に入力してください。
+
+  落ち着いて状況を整理し、
+  あなたの抱えている困り事または悩み事を、
+  簡潔に入力してください。
 
   ユーザーの入力を待機しています…`,
 ];
@@ -222,7 +225,10 @@ export const OPTIMIZER: React.FC = () => {
                 >
                   {dialogueElement.text.split("\n").map((row, rowIdx) => {
                     return (
-                      <div key={`${dialogueIdx}-${rowIdx}`}>
+                      <div
+                        key={`${dialogueIdx}-${rowIdx}`}
+                        style={{ minHeight: "1em" }}
+                      >
                         {row}
                         {responding &&
                           dialogueIdx === dialogueList.length - 1 &&
