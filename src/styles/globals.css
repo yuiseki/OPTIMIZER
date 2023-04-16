@@ -220,6 +220,15 @@ input[type="button"]:disabled {
   }
 }
 
+@keyframes spin-reverse {
+  from {
+    transform: translate(0, 0) rotate(360deg);
+  }
+  to {
+    transform: translate(0, 0) rotate(0);
+  }
+}
+
 .backgroundEffectInnerCircle {
   position: absolute;
   top: 5vh;
@@ -229,7 +238,7 @@ input[type="button"]:disabled {
   margin-right: auto;
   width: 90vh;
   height: 90vh;
-  border: 4px dashed rgba(255, 255, 255, 0.6);
+  border: 4px dashed rgba(255, 255, 255, 0.4);
   border-radius: 90vh;
   animation: spin 90s linear infinite;
   z-index: -1;
@@ -244,8 +253,8 @@ input[type="button"]:disabled {
   margin-right: auto;
   width: 110vh;
   height: 110vh;
-  border: 8px dashed rgba(60, 191, 204, 0.5);
+  border: 8px dashed rgba(60, 191, 204, 0.4);
   border-radius: 110vh;
-  animation: spin 60s linear infinite;
+  animation: spin-reverse 60s linear infinite;
   z-index: -1;
 }
