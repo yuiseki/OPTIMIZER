@@ -229,23 +229,23 @@ input[type="button"]:disabled {
   margin-right: auto;
   width: 90vh;
   height: 90vh;
-  border: 4px dotted rgba(255, 255, 255, 0.6);
+  border: 4px dashed rgba(255, 255, 255, 0.6);
   border-radius: 90vh;
-  animation: spin 5s linear infinite;
+  animation: spin 90s linear infinite;
   z-index: -1;
 }
 
 .backgroundEffectOuterCircle {
   position: absolute;
-  top: 3vh;
-  left: 0;
+  top: -5vh;
+  left: -5vh;
   right: 0;
   margin-left: auto;
   margin-right: auto;
-  width: 94vh;
-  height: 94vh;
-  border: 6px dashed rgba(255, 255, 255, 0.4);
-  border-radius: 94vh;
+  width: 110vh;
+  height: 110vh;
+  border: 8px dashed rgba(255, 255, 255, 0.4);
+  border-radius: 110vh;
   animation: spin 60s linear infinite;
   z-index: -1;
 }
