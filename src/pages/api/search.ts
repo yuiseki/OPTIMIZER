@@ -17,7 +17,7 @@ export default async function handler(
     query = queryInBody;
   }
   if (query === undefined) {
-    res.status(400).json({ status: "ng", message: "query is too long" });
+    res.status(400).json({ status: "ng", message: "query is missing" });
     return;
   }
   const queryString = query as string;
