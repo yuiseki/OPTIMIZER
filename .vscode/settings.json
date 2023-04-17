@@ -1,3 +1,11 @@
 {
-  "cSpell.words": ["HNSW", "hnswlib", "langchain", "openai", "vectorstores"]
+  "cSpell.words": [
+    "blinkmacsystemfont",
+    "HNSW",
+    "hnswlib",
+    "Kaku",
+    "langchain",
+    "openai",
+    "vectorstores"
+  ]
 }
