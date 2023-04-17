@@ -24,7 +24,7 @@ export const CircleClock: React.FC = () => {
         alignItems: "center",
         gap: "6px",
         position: "fixed",
-        bottom: 180,
+        bottom: 250,
         right: 30,
         width: "160px",
         height: "60px",
@@ -34,7 +34,7 @@ export const CircleClock: React.FC = () => {
         backgroundColor: "rgba(79, 79, 79, 0.8)",
         opacity: "0.8",
         transform:
-          "perspective(300px) rotateX(12deg) rotateY(-30deg) rotateZ(6deg)",
+          "perspective(300px) rotateX(12deg) rotateY(-36deg) rotateZ(4deg)",
         fontFamily: "D7MR",
         fontSize: "0.5em",
         fontWeight: "bold",

@@ -22,7 +22,7 @@ export const UserInfoCard: React.FC = () => {
         bottom: 50,
         right: 50,
         width: "300px",
-        height: "120px",
+        height: "190px",
         borderRadius: "2px",
         border: "2px solid rgba(219, 219, 219, 0.2)",
         boxShadow: "0 2px 6px 0 rgba(219, 219, 219, 0.2)",
@@ -44,6 +44,40 @@ export const UserInfoCard: React.FC = () => {
         }}
       >
         USER
+      </div>
+      <div
+        style={{
+          width: "100%",
+          fontSize: "12px",
+          textAlign: "left",
+          paddingLeft: "30px",
+          paddingRight: "30px",
+        }}
+      >
+        Optimization Monitoring Officer,
+      </div>
+      <div
+        style={{
+          width: "100%",
+          fontSize: "12px",
+          textAlign: "left",
+          paddingLeft: "30px",
+          paddingRight: "30px",
+        }}
+      >
+        Bureau for Social Optimization,
+      </div>
+      <div
+        style={{
+          width: "100%",
+          fontSize: "12px",
+          textAlign: "left",
+          paddingLeft: "30px",
+          paddingRight: "30px",
+        }}
+      >
+        The decentralized and distributed autonomous cooperative Digital Agency
+        in Japan
       </div>
       <div
         style={{
