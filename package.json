@@ -13,7 +13,7 @@
   "dependencies": {
     "@pinecone-database/pinecone": "^0.0.12",
     "@types/node": "18.15.11",
-    "@types/react": "18.0.35",
+    "@types/react": "18.0.37",
     "@types/react-dom": "18.0.11",
     "d3-dsv": "^2.0.0",
     "dotenv": "^16.0.3",
