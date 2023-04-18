@@ -79,7 +79,7 @@ body {
 
 body {
   color: rgb(var(--foreground-rgb));
-  animation: background-color 5s linear infinite;
+  animation: background-color 10s linear infinite;
 }
 
 a {
