@@ -8,7 +8,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "store": "node --loader ts-node/esm ./scripts/store_embeddings.ts"
+    "store": "node --loader ts-node/esm ./scripts/store_embeddings.ts",
+    "summarize": "node --loader ts-node/esm ./scripts/summarize_supports.ts"
   },
   "dependencies": {
     "@pinecone-database/pinecone": "^0.0.12",
