@@ -131,7 +131,7 @@ export const OPTIMIZER: React.FC = () => {
           ];
         });
         const original = Object.fromEntries(rows);
-        return `- ${original.title}:\n    - ${original.generatedSummary}\n`;
+        return `- ${original.title}\n    - ${original.generatedSummary}\n`;
       })
       .join("\n");
     console.log(outputPrograms);
