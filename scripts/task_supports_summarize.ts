@@ -4,14 +4,12 @@ import { OpenAI } from "langchain/llms/openai";
 import { loadSummarizationChain } from "langchain/chains";
 import { PromptTemplate } from "langchain";
 import * as fs from "fs";
-import { title } from "process";
 
 dotenv.config();
 
 const loader = new CSVLoader("public/supports.csv");
 const docs = await loader.load();
 console.log(docs.length);
-const slicedDocs = docs.slice(0, 5);
 
 const model = new OpenAI({ temperature: 0 });
 
@@ -34,7 +32,9 @@ const params: any = {
 const chain = loadSummarizationChain(model, params);
 
 const results: { id: string; generatedSummary: string }[] = [];
-for await (const doc of slicedDocs) {
+
+// 要約タスク実行
+for await (const doc of docs) {
   console.log("----- ----- -----");
   const lines = doc.pageContent.split("\n");
   const rows = lines.map((line) => {
@@ -59,7 +59,7 @@ for await (const doc of slicedDocs) {
   console.log("----- ----- -----");
 }
 
-// ファイルに保存
+// 要約結果をファイルに保存
 fs.writeFileSync(
   "public/supportSummaries.json",
   JSON.stringify(results, null, 2)

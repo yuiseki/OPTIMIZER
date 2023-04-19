@@ -5,6 +5,7 @@
     "hnswlib",
     "Kaku",
     "langchain",
+    "llms",
     "openai",
     "vectorstores"
   ]

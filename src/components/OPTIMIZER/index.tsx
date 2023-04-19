@@ -121,26 +121,28 @@ export const OPTIMIZER: React.FC = () => {
     const res = await nextJsonPost("/api/search", { query: newInputText });
     const json = await res.json();
     console.log(json);
-    const systemTitles: string = json
+    const outputPrograms: string = json
       .slice(0, 6)
-      .map((system: [{ metadata: any; pageContent: string }, number]) => {
-        return (
-          "- " +
-          system[0].pageContent
-            .split("\n")[1]
-            .replace("title: ", "")
-            .replaceAll(",", "")
-        );
+      .map((program: [{ metadata: any; pageContent: string }, number]) => {
+        const rows = program[0].pageContent.split("\n").map((line) => {
+          return [
+            line.slice(0, line.indexOf(":")),
+            line.slice(line.indexOf(":") + 2, line.length),
+          ];
+        });
+        const original = Object.fromEntries(rows);
+        return `- ${original.title}:\n    - ${original.generatedSummary}\n`;
       })
       .join("\n");
-    console.log(systemTitles);
+    console.log(outputPrograms);
+
     const newDialogueListWithUserAndAssistantAndResponse = [
       ...newDialogueListWithUserAndAssistant,
       {
         who: "assistant",
         text:
           "あなたの状況を改善するために、以下の制度を活用することを検討してください。\n\n" +
-          systemTitles,
+          outputPrograms,
       },
     ];
     setDialogueList(newDialogueListWithUserAndAssistantAndResponse);
@@ -229,7 +231,10 @@ export const OPTIMIZER: React.FC = () => {
                     return (
                       <div
                         key={`${dialogueIdx}-${rowIdx}`}
-                        style={{ minHeight: "1em" }}
+                        style={{
+                          minHeight: "1em",
+                          marginLeft: row.startsWith(" ") ? "1em" : "0px",
+                        }}
                       >
                         {row}
                         {responding &&
