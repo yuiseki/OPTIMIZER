@@ -2,26 +2,65 @@ import * as dotenv from "dotenv";
 import { CSVLoader } from "langchain/document_loaders/fs/csv";
 import { OpenAI } from "langchain/llms/openai";
 import { loadSummarizationChain } from "langchain/chains";
+import { PromptTemplate } from "langchain";
+import * as fs from "fs";
+import { title } from "process";
 
 dotenv.config();
 
 const loader = new CSVLoader("public/supports.csv");
 const docs = await loader.load();
-
 console.log(docs.length);
-
 const slicedDocs = docs.slice(0, 5);
 
 const model = new OpenAI({ temperature: 0 });
-const chain = loadSummarizationChain(model);
 
+const template = `以下の文章を簡潔にまとめてください。:
+
+"{text}"
+
+簡潔な要約:`;
+
+export const DEFAULT_PROMPT = /*#__PURE__*/ new PromptTemplate({
+  template,
+  inputVariables: ["text"],
+});
+const params: any = {
+  prompt: DEFAULT_PROMPT,
+  combineMapPrompt: DEFAULT_PROMPT,
+  combinePrompt: DEFAULT_PROMPT,
+  type: "map_reduce",
+};
+const chain = loadSummarizationChain(model, params);
+
+const results: { id: string; generatedSummary: string }[] = [];
 for await (const doc of slicedDocs) {
   console.log("----- ----- -----");
-  console.log("original:", doc.pageContent);
+  const lines = doc.pageContent.split("\n");
+  const rows = lines.map((line) => {
+    return [
+      line.slice(0, line.indexOf(":")),
+      line.slice(line.indexOf(":") + 2, line.length),
+    ];
+  });
+  const original = Object.fromEntries(rows);
+  console.log("original:", original);
   const res = await chain.call({
     input_documents: [doc],
   });
-  console.log("\n");
-  console.log("generated summary:", res.text);
+  const result = {
+    id: original.id,
+    title: original.title,
+    generatedSummary: res.text,
+  };
+  results.push(result);
+  console.log("generated:", result);
+
   console.log("----- ----- -----");
 }
+
+// ファイルに保存
+fs.writeFileSync(
+  "public/supportSummaries.json",
+  JSON.stringify(results, null, 2)
+);
