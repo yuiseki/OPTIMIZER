@@ -97,7 +97,7 @@ export const OPTIMIZER: React.FC = () => {
   }, [lastResponseTextLength, responseTextListLength]);
 
   useEffect(() => {
-    setTimeout(initializer, 80);
+    setTimeout(initializer, 50);
   }, [initializer]);
 
   const submit = useCallback(async () => {
