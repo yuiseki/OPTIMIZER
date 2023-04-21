@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<?xml-stylesheet type="text/xml" href="#style20150523"?>
+<xsl:stylesheet
+  id="style20150523"
+  version="1.0"
+  xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+  xmlns:fo="http://www.w3.org/1999/XSL/Format"
+>
+<xsl:output method="html" encoding="utf-8" />
+<xsl:variable name="data"> 
+<database>
+<TM00000000000001><TK00000100000005
+          DateOfDetection="2015-10-05"
+          TimeAndDateOfUpdate="2015-10-05T00:00:00"
+          Version="1"
+        ><TK00000100000010
+            DateOfDetection="2015-10-05"
+            TimeAndDateOfUpdate="2015-10-05T00:00:00"
+            Version="2"
+          ><TK00000100000020 Version="2">02</TK00000100000020><TK00000100000030
+              Version="2"
+            >  </TK00000100000030><TK00000100000040
+              Version="2"
+            >  </TK00000100000040><TK00000100000050
+              Version="2"
+            >  </TK00000100000050></TK00000100000010><TK00000100000060
+            Version="2"
+          >0000000000     </TK00000100000060></TK00000100000005></TM00000000000001>
+</database>
+</xsl:variable>
+<xsl:template match="/">
+<html>
+<head>
+</head>
+<body>
+<table border="1">
+<tr>
+<th>項番</th>
+<th>項目コード</th>
+<th>回答</th>
+</tr>
+<xsl:apply-templates select="//database/*" />
+</table>
+</body>
+</html>
+</xsl:template>
+<xsl:template match="*">
+<tr>
+<td>
+<xsl:number level="any" count="*" from="database" />
+</td>
+<td>
+<xsl:value-of select="name()" />
+</td>
+<td>
+<xsl:apply-templates />
+</td>
+</tr>
+</xsl:template>
+</xsl:stylesheet>
