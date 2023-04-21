@@ -13,7 +13,7 @@
     "store-summarize": "node --loader ts-node/esm ./scripts/store_embeddings_summarized.ts"
   },
   "dependencies": {
-    "@pinecone-database/pinecone": "^0.0.12",
+    "@pinecone-database/pinecone": "^0.0.14",
     "@types/node": "18.15.13",
     "@types/react": "18.0.37",
     "@types/react-dom": "18.0.11",
