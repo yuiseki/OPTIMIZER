@@ -112,6 +112,7 @@ export const OPTIMIZER: React.FC = () => {
     ];
     setDialogueList(newDialogueListWithUser);
     await sleep(100);
+    /*
     const newDialogueListWithUserAndAssistant = [
       ...newDialogueListWithUser,
       {
@@ -122,6 +123,7 @@ export const OPTIMIZER: React.FC = () => {
     setDialogueList(newDialogueListWithUserAndAssistant);
     await scrollToBottom();
     await sleep(100);
+    */
     const res = await nextJsonPost("/api/completion", { query: newInputText });
 
     const stream = res.body;
@@ -137,7 +139,7 @@ export const OPTIMIZER: React.FC = () => {
         setOutputText((prevOutputText) => {
           const nextOutputText = prevOutputText + decodedValue;
           const newDialogueListWithUserAndAssistantAndResponse = [
-            ...newDialogueListWithUserAndAssistant,
+            ...newDialogueListWithUser,
             {
               who: "assistant",
               text: nextOutputText,
