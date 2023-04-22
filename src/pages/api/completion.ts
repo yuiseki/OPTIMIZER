@@ -72,7 +72,22 @@ export default async function handler(
   const condition = nowDate.getTime() < limitDate.getTime();
 
   if (condition) {
-    const llm = new OpenAI({ temperature: 0, maxTokens: 1000 });
+    res.writeHead(200, {
+      "Content-Type": "application/octet-stream",
+      "Transfer-Encoding": "chunked",
+    });
+    const llm = new OpenAI({
+      temperature: 0,
+      maxTokens: 1000,
+      streaming: true,
+      callbacks: [
+        {
+          handleLLMNewToken: (token: string) => {
+            res.write(`${token}`);
+          },
+        },
+      ],
+    });
     const promptTemplate = new PromptTemplate({
       template: `
 あなたはユーザーの状況を改善し、ユーザーの要望を叶える、有用なアシスタントである。
@@ -96,13 +111,13 @@ export default async function handler(
       programs: programsText,
     });
     console.log(completionRes);
-    completionText = completionRes.text;
+    res.end();
+  } else {
+    res.status(200).json({
+      programsText: programsText,
+      completionText: completionText,
+      query: query,
+      programs: programs,
+    });
   }
-
-  res.status(200).json({
-    programsText: programsText,
-    completionText: completionText,
-    query: query,
-    programs: programs,
-  });
 }

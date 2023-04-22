@@ -47,6 +47,7 @@ export const OPTIMIZER: React.FC = () => {
   const [responding, setResponding] = useState(true);
 
   const [inputText, setInputText] = useState("");
+  const [outputText, setOutputText] = useState("");
 
   const initializer = useCallback(() => {
     if (
@@ -122,11 +123,44 @@ export const OPTIMIZER: React.FC = () => {
     await scrollToBottom();
     await sleep(100);
     const res = await nextJsonPost("/api/completion", { query: newInputText });
+
+    const stream = res.body;
+    const reader = stream?.getReader();
+    const decoder = new TextDecoder("utf-8");
+    try {
+      while (true) {
+        const { done, value }: any = await reader?.read();
+        if (done) {
+          break;
+        }
+        const decodedValue = decoder.decode(value, { stream: true });
+        setOutputText((prevOutputText) => {
+          const nextOutputText = prevOutputText + decodedValue;
+          const newDialogueListWithUserAndAssistantAndResponse = [
+            ...newDialogueListWithUserAndAssistant,
+            {
+              who: "assistant",
+              text: nextOutputText,
+            },
+          ];
+          setDialogueList(newDialogueListWithUserAndAssistantAndResponse);
+          scrollToBottom();
+          return nextOutputText;
+        });
+      }
+    } catch (error) {
+      console.error(error);
+    } finally {
+      reader?.releaseLock();
+      setResponding(false);
+    }
+
+    // 旧実装
+    /*
     const json = await res.json();
     console.log(json);
-    const programsText: string = json.programsText;
+    const programsText = json.programsText;
     const completionText = json.completionText;
-
     const newDialogueListWithUserAndAssistantAndResponse = [
       ...newDialogueListWithUserAndAssistant,
       {
@@ -138,6 +172,7 @@ export const OPTIMIZER: React.FC = () => {
     setDialogueList(newDialogueListWithUserAndAssistantAndResponse);
     setResponding(false);
     await scrollToBottom();
+    */
   }, [inputText, dialogueList]);
 
   return (
