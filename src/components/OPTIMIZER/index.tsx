@@ -113,8 +113,7 @@ export const OPTIMIZER: React.FC = () => {
     setDialogueList(newDialogueListWithUser);
     await sleep(100);
 
-    const waitText =
-      "ユーザーの入力に従って、社会の最適化を計算しています…\n\n";
+    const waitText = "ユーザーの入力に従って、社会の最適化を計算しています…\n";
     setOutputText(waitText);
     const newDialogueListWithUserAndAssistantAndResponse = [
       ...newDialogueListWithUser,
@@ -158,25 +157,6 @@ export const OPTIMIZER: React.FC = () => {
       setResponding(false);
       setOutputText("");
     }
-
-    // 旧実装
-    /*
-    const json = await res.json();
-    console.log(json);
-    const programsText = json.programsText;
-    const completionText = json.completionText;
-    const newDialogueListWithUserAndAssistantAndResponse = [
-      ...newDialogueListWithUserAndAssistant,
-      {
-        who: "assistant",
-        text: completionText,
-        details: programsText,
-      },
-    ];
-    setDialogueList(newDialogueListWithUserAndAssistantAndResponse);
-    setResponding(false);
-    await scrollToBottom();
-    */
   }, [inputText, dialogueList]);
 
   return (
