@@ -62,6 +62,6 @@ for await (const doc of docs.slice(0, 5)) {
 
 // 要約結果をファイルに保存
 fs.writeFileSync(
-  "public/supportTargets.json",
+  "public/supportsTargets.json",
   JSON.stringify(results, null, 2)
 );
