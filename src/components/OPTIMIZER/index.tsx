@@ -153,6 +153,7 @@ export const OPTIMIZER: React.FC = () => {
     } finally {
       reader?.releaseLock();
       setResponding(false);
+      setOutputText("");
     }
 
     // 旧実装
