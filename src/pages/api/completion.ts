@@ -79,7 +79,6 @@ export default async function handler(
       "Content-Type": "text/event-stream",
       "Transfer-Encoding": "chunked",
     });
-    res.write("ユーザーの入力に従って、社会の最適化を計算しています…\n\n");
     res.flushHeaders();
     const llm = new OpenAI({
       temperature: 0,

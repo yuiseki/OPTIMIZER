@@ -126,6 +126,19 @@ export const OPTIMIZER: React.FC = () => {
     */
     const res = await nextJsonPost("/api/completion", { query: newInputText });
 
+    const waitText =
+      "ユーザーの入力に従って、社会の最適化を計算しています…\n\n";
+    setOutputText(waitText);
+    const newDialogueListWithUserAndAssistantAndResponse = [
+      ...newDialogueListWithUser,
+      {
+        who: "assistant",
+        text: waitText,
+      },
+    ];
+    setDialogueList(newDialogueListWithUserAndAssistantAndResponse);
+    scrollToBottom();
+
     const stream = res.body;
     const reader = stream?.getReader();
     const decoder = new TextDecoder("utf-8");
