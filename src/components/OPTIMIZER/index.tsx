@@ -110,7 +110,6 @@ export const OPTIMIZER: React.FC = () => {
       { who: "user", text: inputText },
     ];
     setDialogueList(newDialogueListWithUser);
-    await scrollToBottom();
     await sleep(100);
     const newDialogueListWithUserAndAssistant = [
       ...newDialogueListWithUser,
