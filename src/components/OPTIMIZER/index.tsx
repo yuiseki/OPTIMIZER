@@ -113,7 +113,7 @@ export const OPTIMIZER: React.FC = () => {
     setDialogueList(newDialogueListWithUser);
     await sleep(100);
 
-    const waitText = "ユーザーの入力に従って、社会の最適化を計算しています…\n";
+    const waitText = `ユーザーの入力に従って、社会の最適化を計算しています。この処理には1分間ほどお時間が掛かる場合がございます。\n\nそのままお待ち下さい…\n`;
     setOutputText(waitText);
     const newDialogueListWithUserAndAssistantAndResponse = [
       ...newDialogueListWithUser,
