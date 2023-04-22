@@ -14,7 +14,7 @@ const initializeSequence = [
 使用許諾確認。
 適正ユーザーです。
 
-最適化支援モード、ゴールシーク・エクスプローラー。
+最適化支援モード、コンプリーション・リゾルバー。
 
 落ち着いて状況を整理し、
 あなたの抱えている困り事や悩み事を、
@@ -112,18 +112,7 @@ export const OPTIMIZER: React.FC = () => {
     ];
     setDialogueList(newDialogueListWithUser);
     await sleep(100);
-    /*
-    const newDialogueListWithUserAndAssistant = [
-      ...newDialogueListWithUser,
-      {
-        who: "assistant",
-        text: "ユーザーの入力に従って、社会の最適化を計算しています…",
-      },
-    ];
-    setDialogueList(newDialogueListWithUserAndAssistant);
-    await scrollToBottom();
-    await sleep(100);
-    */
+
     const res = await nextJsonPost("/api/completion", { query: newInputText });
 
     const waitText =
@@ -137,7 +126,7 @@ export const OPTIMIZER: React.FC = () => {
       },
     ];
     setDialogueList(newDialogueListWithUserAndAssistantAndResponse);
-    scrollToBottom();
+    await scrollToBottom();
 
     const stream = res.body;
     const reader = stream?.getReader();
