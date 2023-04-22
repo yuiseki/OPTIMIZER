@@ -73,7 +73,10 @@ export default async function handler(
 
   if (condition) {
     res.writeHead(200, {
-      "Content-Type": "application/octet-stream",
+      Connection: "keep-alive",
+      "Content-Encoding": "none",
+      "Cache-Control": "no-cache",
+      "Content-Type": "text/event-stream",
       "Transfer-Encoding": "chunked",
     });
     const llm = new OpenAI({
