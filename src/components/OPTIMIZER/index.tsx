@@ -113,8 +113,6 @@ export const OPTIMIZER: React.FC = () => {
     setDialogueList(newDialogueListWithUser);
     await sleep(100);
 
-    const res = await nextJsonPost("/api/completion", { query: newInputText });
-
     const waitText =
       "ユーザーの入力に従って、社会の最適化を計算しています…\n\n";
     setOutputText(waitText);
@@ -128,6 +126,7 @@ export const OPTIMIZER: React.FC = () => {
     setDialogueList(newDialogueListWithUserAndAssistantAndResponse);
     await scrollToBottom();
 
+    const res = await nextJsonPost("/api/completion", { query: newInputText });
     const stream = res.body;
     const reader = stream?.getReader();
     const decoder = new TextDecoder("utf-8");
