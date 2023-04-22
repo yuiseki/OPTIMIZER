@@ -73,7 +73,6 @@ export default async function handler(
 
   if (condition) {
     const llm = new OpenAI({ temperature: 0, maxTokens: 1000 });
-    console.log(JSON.stringify(llm));
     const promptTemplate = new PromptTemplate({
       template: `
 あなたはユーザーの状況を改善し、ユーザーの要望を叶える、有用なアシスタントである。
@@ -92,12 +91,12 @@ export default async function handler(
       prompt: promptTemplate,
       llm: llm,
     });
-    const chatRes = await chain.call({
+    const completionRes = await chain.call({
       user_query: query,
       programs: programsText,
     });
-    console.log({ chatRes });
-    completionText = chatRes.text;
+    console.log(completionRes);
+    completionText = completionRes.text;
   }
 
   res.status(200).json({
