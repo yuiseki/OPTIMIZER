@@ -67,7 +67,7 @@ export default async function handler(
   process.env.TZ = "Asia/Tokyo";
   const nowDate = new Date();
   console.log(nowDate.toLocaleString());
-  const limitDate = new Date("2023-04-22 21:00");
+  const limitDate = new Date("2023-04-29 21:00");
   console.log(limitDate.toLocaleString());
   const condition = nowDate.getTime() < limitDate.getTime();
 
