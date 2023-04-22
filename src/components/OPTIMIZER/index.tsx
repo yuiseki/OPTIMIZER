@@ -39,6 +39,7 @@ export const OPTIMIZER: React.FC = () => {
     {
       who: string;
       text: string;
+      details?: string;
     }[]
   >([]);
   const [responseTextListLength, setResponseTextListLength] = useState(1);
@@ -113,36 +114,26 @@ export const OPTIMIZER: React.FC = () => {
     await sleep(100);
     const newDialogueListWithUserAndAssistant = [
       ...newDialogueListWithUser,
-      { who: "assistant", text: "入力に基づき、社会の最適化を計算しています…" },
+      {
+        who: "assistant",
+        text: "ユーザーの入力に従って、社会の最適化を計算しています…",
+      },
     ];
     setDialogueList(newDialogueListWithUserAndAssistant);
     await scrollToBottom();
-    await sleep(500);
-    const res = await nextJsonPost("/api/search", { query: newInputText });
+    await sleep(100);
+    const res = await nextJsonPost("/api/completion", { query: newInputText });
     const json = await res.json();
     console.log(json);
-    const outputPrograms: string = json
-      .slice(0, 6)
-      .map((program: [{ metadata: any; pageContent: string }, number]) => {
-        const rows = program[0].pageContent.split("\n").map((line) => {
-          return [
-            line.slice(0, line.indexOf(":")),
-            line.slice(line.indexOf(":") + 2, line.length),
-          ];
-        });
-        const original = Object.fromEntries(rows);
-        return `- ${original.title}\n    - ${original.generatedSummary}\n`;
-      })
-      .join("\n");
-    console.log(outputPrograms);
+    const programsText: string = json.programsText;
+    const completionText = json.completionText;
 
     const newDialogueListWithUserAndAssistantAndResponse = [
       ...newDialogueListWithUserAndAssistant,
       {
         who: "assistant",
-        text:
-          "あなたの状況を改善するために、以下の制度を活用することを検討してください。\n\n" +
-          outputPrograms,
+        text: completionText,
+        details: programsText,
       },
     ];
     setDialogueList(newDialogueListWithUserAndAssistantAndResponse);
@@ -246,6 +237,35 @@ export const OPTIMIZER: React.FC = () => {
                       </div>
                     );
                   })}
+                  {dialogueElement.details && (
+                    <>
+                      <details style={{ marginTop: "20px" }}>
+                        <summary>各制度の詳細情報</summary>
+                        {dialogueElement.details
+                          .split("\n")
+                          .map((row, rowIdx) => {
+                            return (
+                              <div
+                                key={`${dialogueIdx}-details-${rowIdx}`}
+                                style={{
+                                  minHeight: "1em",
+                                  marginLeft: row.startsWith(" ")
+                                    ? "1em"
+                                    : "0px",
+                                }}
+                              >
+                                {row}
+                                {responding &&
+                                  dialogueIdx === dialogueList.length - 1 &&
+                                  rowIdx ===
+                                    dialogueElement.text.split("\n").length -
+                                      1 && <span className="blinkingCursor" />}
+                              </div>
+                            );
+                          })}
+                      </details>
+                    </>
+                  )}
                 </div>
               </div>
             );

@@ -11,7 +11,7 @@ const loader = new CSVLoader("public/supports.csv");
 const docs = await loader.load();
 console.log(docs.length);
 
-const model = new OpenAI({ temperature: 0 });
+const model = new OpenAI({ temperature: 0, maxTokens: 1000 });
 
 const template = `以下の文章を簡潔にまとめてください。:
 

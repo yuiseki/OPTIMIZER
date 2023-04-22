@@ -20,7 +20,7 @@ export const SupportModeCard: React.FC = () => {
         alignItems: "center",
         position: "fixed",
         top: 50,
-        right: 10,
+        right: 20,
         gap: "2px",
         width: "340px",
         height: "260px",
@@ -93,6 +93,17 @@ export const SupportModeCard: React.FC = () => {
       </div>
       <div
         style={{
+          width: "100%",
+          fontSize: "12px",
+          textAlign: "left",
+          paddingLeft: "30px",
+          paddingRight: "30px",
+        }}
+      >
+        Large Language Model: `text-davinci-003`
+      </div>
+      <div
+        style={{
           fontWeight: "normal",
           fontSize: "1.2em",
           opacity: "0.9",
@@ -116,7 +127,10 @@ export const SupportModeCard: React.FC = () => {
           paddingLeft: "30px",
         }}
       >
+        {/* 
         GOAL-SEEK EXPLORER
+        */}
+        COMPLETION RESOLVER
       </div>
       <div
         style={{
