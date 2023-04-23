@@ -2,8 +2,18 @@ import Map from "react-map-gl";
 import maplibregl from "maplibre-gl";
 
 import "maplibre-gl/dist/maplibre-gl.css";
+import { useEffect, useState } from "react";
 
 export const LocationMap = () => {
+  const [isMobile, setIsMobile] = useState(true);
+
+  useEffect(() => {
+    setIsMobile(window.matchMedia("(max-width: 1000px)").matches);
+  }, []);
+
+  if (isMobile) {
+    return null;
+  }
   return (
     <>
       <div
