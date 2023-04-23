@@ -49,6 +49,5 @@ console.log(docs);
 console.log(docs.length);
 
 const vectorStoreSaveDir = "public/data/Tokyo/Taito/vector_stores/base";
-
 const vectorStore = await HNSWLib.fromDocuments(docs, new OpenAIEmbeddings());
 await vectorStore.save(vectorStoreSaveDir);

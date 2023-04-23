@@ -11,8 +11,9 @@
     "store": "node --loader ts-node/esm ./scripts/store_embeddings_base.ts",
     "task-summarize": "node --loader ts-node/esm ./scripts/task_supports_summarize.ts",
     "store-summarize": "node --loader ts-node/esm ./scripts/store_embeddings_summarized.ts",
-    "fetch:tokyo:taito": "node --loader ts-node/esm ./scripts/fetch_and_store_Tokyo_Taito.ts",
-    "test:tokyo:taito": "node --loader ts-node/esm ./scripts/test_Tokyo_Taito.ts"
+    "tokyo:taito:fetch": "node --loader ts-node/esm ./scripts/fetch_and_store_Tokyo_Taito.ts",
+    "tokyo:taito:summarize": "node --loader ts-node/esm ./scripts/task_summarize_Tokyo_Taito.ts",
+    "tokyo:taito:test": "node --loader ts-node/esm ./scripts/test_Tokyo_Taito.ts"
   },
   "dependencies": {
     "@types/node": "18.15.13",

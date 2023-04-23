@@ -2,24 +2,17 @@ import * as dotenv from "dotenv";
 import { CSVLoader } from "langchain/document_loaders/fs/csv";
 import { OpenAI } from "langchain/llms/openai";
 import { loadSummarizationChain } from "langchain/chains";
-import { PromptTemplate } from "langchain";
 import * as fs from "fs";
+import { PromptTemplate } from "langchain/prompts";
 
 dotenv.config();
-
-const loader = new CSVLoader("public/supports.csv");
-const docs = await loader.load();
-console.log(docs.length);
-
-const model = new OpenAI({ temperature: 0, maxTokens: 1000 });
 
 const template = `以下の文章を簡潔にまとめてください。:
 
 "{text}"
 
 簡潔な要約:`;
-
-export const DEFAULT_PROMPT = /*#__PURE__*/ new PromptTemplate({
+const DEFAULT_PROMPT = /*#__PURE__*/ new PromptTemplate({
   template,
   inputVariables: ["text"],
 });
@@ -29,11 +22,19 @@ const params: any = {
   combinePrompt: DEFAULT_PROMPT,
   type: "map_reduce",
 };
-const chain = loadSummarizationChain(model, params);
+const SummarizationChainParamsJapanese = params;
 
-const results: { id: string; generatedSummary: string }[] = [];
+const loader = new CSVLoader("public/data/DigitalAgency/supports.csv");
+const docs = await loader.load();
+console.log(docs.length);
+
+// 要約タスク準備
+const model = new OpenAI({ temperature: 0, maxTokens: 1000 });
+const chain = loadSummarizationChain(model, SummarizationChainParamsJapanese);
 
 // 要約タスク実行
+const results: { id: string; generatedSummary: string }[] = [];
+
 for await (const doc of docs) {
   console.log("----- ----- -----");
   const lines = doc.pageContent.split("\n");
@@ -61,6 +62,6 @@ for await (const doc of docs) {
 
 // 要約結果をファイルに保存
 fs.writeFileSync(
-  "public/supportSummaries.json",
+  "public/data/DigitalAgency/supportSummaries.json",
   JSON.stringify(results, null, 2)
 );

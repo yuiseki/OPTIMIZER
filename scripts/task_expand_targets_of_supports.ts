@@ -7,7 +7,7 @@ import * as fs from "fs";
 
 dotenv.config();
 
-const loader = new CSVLoader("public/supports.csv");
+const loader = new CSVLoader("public/data/DigitalAgency/supports.csv");
 const docs = await loader.load();
 console.log(docs.length);
 
@@ -62,6 +62,6 @@ for await (const doc of docs.slice(0, 5)) {
 
 // 要約結果をファイルに保存
 fs.writeFileSync(
-  "public/supportsTargets.json",
+  "public/data/DigitalAgency/supportsTargets.json",
   JSON.stringify(results, null, 2)
 );

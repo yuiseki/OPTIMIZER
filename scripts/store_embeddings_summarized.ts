@@ -10,7 +10,7 @@ console.log(docs.length);
 
 dotenv.config();
 
-const vectorStoreSaveDir = "public/vector_store/summarized";
+const vectorStoreSaveDir = "public/data/DigitalAgency/vector_stores/summarized";
 
 /*
 const vectorStore = await HNSWLib.fromDocuments(docs, new OpenAIEmbeddings());

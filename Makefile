@@ -1,6 +1,6 @@
 
 all: \
-	public/supports.csv \
+	public/data/DigitalAgency/supports.csv \
 	vector_store
 
 clean:
@@ -14,16 +14,16 @@ fetch_all_supports:
 	mkdir -p ./tmp/supports
 	bash ./scripts/fetch_all_supports.sh
 
-public/supports.json: fetch_all_supports
-	cat tmp/supports/*.json | jq -s '.[0].items=([.[].items]|flatten)|.[0]'  > ./public/supports.json
+public/data/DigitalAgency/supports.json: fetch_all_supports
+	cat tmp/supports/*.json | jq -s '.[0].items=([.[].items]|flatten)|.[0]'  > ./public/data/DigitalAgency/supports.json
 
-public/supports.csv: public/supports.json
-	echo "id,title,summary,body,target" > ./public/supports.csv
+public/data/DigitalAgency/supports.csv: public/data/DigitalAgency/supports.json
+	echo "id,title,summary,body,target" > ./public/data/DigitalAgency/supports.csv
 	cat public/supports.json | jq -r '.items[] | [.id, .title, .summary, .body, .target] | @csv | gsub("[\\r\\n\\t]"; "") // ""' >> ./public/supports.csv
 
-public/supportsSummarized.csv:
-	echo "id,title,generatedSummary" > ./public/supportsSummarized.csv
-	cat public/supportsSummarized.json | jq -r '.[] | [.id, .title, .generatedSummary] | @csv | gsub("[\\r\\n\\t]"; "") // ""' >> ./public/supportsSummarized.csv
+public/data/DigitalAgency/supportsSummarized.csv:
+	echo "id,title,generatedSummary" > ./public/data/DigitalAgency/supportsSummarized.csv
+	cat public/data/DigitalAgency/supportsSummarized.json | jq -r '.[] | [.id, .title, .generatedSummary] | @csv | gsub("[\\r\\n\\t]"; "") // ""' >> ./public/data/DigitalAgency/supportsSummarized.csv
 
 .PHONY: vector_store
 vector_store:
