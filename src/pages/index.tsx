@@ -6,6 +6,7 @@ import { BackgroundEffect } from "@/components/BackgroundEffect";
 import { CircleClock } from "@/components/CircleClock";
 import { OPTIMIZER } from "@/components/OPTIMIZER";
 import { UserInfoCard } from "@/components/UserInfoCard";
+import { LocationMap } from "@/components/LocationMap";
 
 export default function Home() {
   return (
@@ -36,6 +37,7 @@ export default function Home() {
       <CircleClock />
       <SupportModeCard />
       <UserInfoCard />
+      <LocationMap />
       <OPTIMIZER />
     </>
   );
