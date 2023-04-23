@@ -37,6 +37,7 @@ export default async function handler(
     return;
   }
 
+  // デジタル庁の制度を探す
   const digitalAgencyDir = path.resolve(
     "public",
     "data",
@@ -44,11 +45,13 @@ export default async function handler(
     "vector_stores",
     "summarized"
   );
-  const digitalAgencyVectorStore = await HNSWLib.load(digitalAgencyDir, new OpenAIEmbeddings());
-
-  const results = await digitalAgencyVectorStore.similaritySearchWithScore(queryString, 10);
-
-  const programs = results.map((result) => {
+  const digitalAgencyVectorStore = await HNSWLib.load(
+    digitalAgencyDir,
+    new OpenAIEmbeddings()
+  );
+  const digitalAgencyResults =
+    await digitalAgencyVectorStore.similaritySearchWithScore(queryString, 10);
+  const digitalAgencyPrograms = digitalAgencyResults.map((result) => {
     const rows = result[0].pageContent.split("\n").map((line) => {
       return [
         line.slice(0, line.indexOf(":")),
@@ -59,8 +62,7 @@ export default async function handler(
     original.similarity = result[1];
     return original;
   });
-
-  const programsText = programs
+  const digitalAgencyProgramsText = digitalAgencyPrograms
     .slice(0, 5)
     .map((program) => {
       return `- ${program.title}\n    - ${program.generatedSummary}\n`;
@@ -118,16 +120,16 @@ export default async function handler(
     });
     const completionRes = await chain.call({
       user_query: query,
-      programs: programsText,
+      programs: digitalAgencyProgramsText,
     });
     console.log(completionRes);
     res.end();
   } else {
     res.status(200).json({
-      programsText: programsText,
+      programsText: digitalAgencyProgramsText,
       completionText: completionText,
       query: query,
-      programs: programs,
+      programs: digitalAgencyPrograms,
     });
   }
 }
