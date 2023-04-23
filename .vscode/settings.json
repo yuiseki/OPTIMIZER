@@ -7,6 +7,7 @@
     "langchain",
     "llms",
     "openai",
+    "taito",
     "vectorstores"
   ]
 }
