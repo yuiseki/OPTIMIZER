@@ -63,9 +63,31 @@ export default async function handler(
     return original;
   });
   const digitalAgencyProgramsText = digitalAgencyPrograms
-    .slice(0, 5)
+    .slice(0, 3)
     .map((program) => {
       return `- ${program.title}\n    - ${program.generatedSummary}\n`;
+    })
+    .join("\n");
+
+  // 台東区の制度を探す
+  const tokyoTaitoDir = path.resolve(
+    "public",
+    "data",
+    "Tokyo",
+    "Taito",
+    "vector_stores",
+    "summarized"
+  );
+  const tokyoTaitoVectorStore = await HNSWLib.load(
+    tokyoTaitoDir,
+    new OpenAIEmbeddings()
+  );
+  const tokyoTaitoResults =
+    await tokyoTaitoVectorStore.similaritySearchWithScore(queryString, 10);
+  const tokyoTaitoProgramsText = tokyoTaitoResults
+    .slice(0, 3)
+    .map((program) => {
+      return `- ${program[0].pageContent}\n`;
     })
     .join("\n");
 
@@ -110,9 +132,12 @@ export default async function handler(
 有用と思われる制度の情報:
 {programs}
 
+有用と思われる地域の制度の情報:
+{area_programs}
+
 ユーザーの状況を改善するために、あるいはユーザーの要望を叶えるために、これらの制度のうち、ユーザーの役立つものを簡潔かつ丁寧に紹介する文章:
     `,
-      inputVariables: ["user_query", "programs"],
+      inputVariables: ["user_query", "programs", "area_programs"],
     });
     const chain = new LLMChain({
       prompt: promptTemplate,
@@ -121,6 +146,7 @@ export default async function handler(
     const completionRes = await chain.call({
       user_query: query,
       programs: digitalAgencyProgramsText,
+      area_programs: tokyoTaitoProgramsText,
     });
     console.log(completionRes);
     res.end();
