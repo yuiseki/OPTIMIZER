@@ -37,16 +37,16 @@ export default async function handler(
     return;
   }
 
-  const directory = path.resolve(
+  const digitalAgencyDir = path.resolve(
     "public",
     "data",
     "DigitalAgency",
     "vector_stores",
     "summarized"
   );
-  const vectorStore = await HNSWLib.load(directory, new OpenAIEmbeddings());
+  const digitalAgencyVectorStore = await HNSWLib.load(digitalAgencyDir, new OpenAIEmbeddings());
 
-  const results = await vectorStore.similaritySearchWithScore(queryString, 10);
+  const results = await digitalAgencyVectorStore.similaritySearchWithScore(queryString, 10);
 
   const programs = results.map((result) => {
     const rows = result[0].pageContent.split("\n").map((line) => {
