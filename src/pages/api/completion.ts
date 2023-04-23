@@ -37,21 +37,51 @@ export default async function handler(
     return;
   }
 
+  let addrPref = "Tokyo";
+  const { addrPref: addrPrefInQuery } = req.query;
+  if (addrPrefInQuery !== undefined) {
+    addrPref = addrPrefInQuery as string;
+  }
+  const { addrPref: addrPrefInBody } = req.body;
+  if (addrPrefInBody !== undefined) {
+    query = addrPrefInBody;
+  }
+  const addrPrefString = addrPref as string;
+  if (addrPrefString.length > 400) {
+    res.status(400).json({ status: "ng", message: "addrPref is too long" });
+    return;
+  }
+
+  let addrCity = "Taito";
+  const { addrCity: addrCityInQuery } = req.query;
+  if (addrCityInQuery !== undefined) {
+    addrCity = addrCityInQuery as string;
+  }
+  const { addrCity: addrCityInBody } = req.body;
+  if (addrCityInBody !== undefined) {
+    query = addrCityInBody;
+  }
+  const addrCityString = addrCity as string;
+  if (addrCityString.length > 400) {
+    res.status(400).json({ status: "ng", message: "addrCity is too long" });
+    return;
+  }
+
   // デジタル庁の制度を探す
-  const digitalAgencyDir = path.resolve(
+  const digitalAgencySummarizedVectorStoreDir = path.resolve(
     "public",
     "data",
     "DigitalAgency",
     "vector_stores",
     "summarized"
   );
-  const digitalAgencyVectorStore = await HNSWLib.load(
-    digitalAgencyDir,
+  const digitalAgencySummarizedVectorStore = await HNSWLib.load(
+    digitalAgencySummarizedVectorStoreDir,
     new OpenAIEmbeddings()
   );
-  const digitalAgencyResults =
-    await digitalAgencyVectorStore.similaritySearchWithScore(queryString, 10);
-  const digitalAgencyPrograms = digitalAgencyResults.map((result) => {
+  const digitalAgencySummarizedResults =
+    await digitalAgencySummarizedVectorStore.similaritySearchWithScore(queryString, 10);
+  const digitalAgencySummarizedPrograms = digitalAgencySummarizedResults.map((result) => {
     const rows = result[0].pageContent.split("\n").map((line) => {
       return [
         line.slice(0, line.indexOf(":")),
@@ -62,29 +92,29 @@ export default async function handler(
     original.similarity = result[1];
     return original;
   });
-  const digitalAgencyProgramsText = digitalAgencyPrograms
+  const digitalAgencySummarizedProgramsText = digitalAgencySummarizedPrograms
     .slice(0, 3)
     .map((program) => {
       return `- ${program.title}\n    - ${program.generatedSummary}\n`;
     })
     .join("\n");
 
-  // 台東区の制度を探す
-  const tokyoTaitoDir = path.resolve(
+  // addrの制度を探す
+  const residentAreaSummarizedVectorStoreDir = path.resolve(
     "public",
     "data",
-    "Tokyo",
-    "Taito",
+    addrPrefString,
+    addrCityString,
     "vector_stores",
     "summarized"
   );
-  const tokyoTaitoVectorStore = await HNSWLib.load(
-    tokyoTaitoDir,
+  const residentAreaSummarizedVectorStore = await HNSWLib.load(
+    residentAreaSummarizedVectorStoreDir,
     new OpenAIEmbeddings()
   );
-  const tokyoTaitoResults =
-    await tokyoTaitoVectorStore.similaritySearchWithScore(queryString, 10);
-  const tokyoTaitoProgramsText = tokyoTaitoResults
+  const residentAreaSummarizedPrograms =
+    await residentAreaSummarizedVectorStore.similaritySearchWithScore(queryString, 10);
+  const residentAreaSummarizedProgramsText = residentAreaSummarizedPrograms
     .slice(0, 3)
     .map((program) => {
       return `- ${program[0].pageContent}\n`;
@@ -145,17 +175,17 @@ export default async function handler(
     });
     const completionRes = await chain.call({
       user_query: query,
-      programs: digitalAgencyProgramsText,
-      area_programs: tokyoTaitoProgramsText,
+      programs: digitalAgencySummarizedProgramsText,
+      area_programs: residentAreaSummarizedProgramsText,
     });
     console.log(completionRes);
     res.end();
   } else {
     res.status(200).json({
-      programsText: digitalAgencyProgramsText,
+      programsText: digitalAgencySummarizedProgramsText,
       completionText: completionText,
       query: query,
-      programs: digitalAgencyPrograms,
+      programs: digitalAgencySummarizedPrograms,
     });
   }
 }
