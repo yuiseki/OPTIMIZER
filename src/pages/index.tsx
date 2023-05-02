@@ -31,7 +31,7 @@ export default function Home() {
         />
         <meta property="og:url" content="https://optimizer.yuiseki.net/" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="https://i.gyazo.com/9048fd2630b127f8393db8edcc514c83.png />
       </Head>
       <BackgroundEffect />
       <CircleClock />
