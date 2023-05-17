@@ -129,16 +129,6 @@ export default async function handler(
     })
     .join("\n");
 
-  let completionText =
-    "あなたの状況を改善するために、以下の制度を活用することを検討してください。";
-
-  process.env.TZ = "Asia/Tokyo";
-  const nowDate = new Date();
-  console.log(nowDate.toLocaleString());
-  const limitDate = new Date("2023-04-29 21:00");
-  console.log(limitDate.toLocaleString());
-  const condition = nowDate.getTime() < limitDate.getTime();
-
   res.writeHead(200, {
     Connection: "keep-alive",
     "Content-Encoding": "none",
