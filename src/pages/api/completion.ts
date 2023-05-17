@@ -80,18 +80,23 @@ export default async function handler(
     new OpenAIEmbeddings()
   );
   const digitalAgencySummarizedResults =
-    await digitalAgencySummarizedVectorStore.similaritySearchWithScore(queryString, 10);
-  const digitalAgencySummarizedPrograms = digitalAgencySummarizedResults.map((result) => {
-    const rows = result[0].pageContent.split("\n").map((line) => {
-      return [
-        line.slice(0, line.indexOf(":")),
-        line.slice(line.indexOf(":") + 2, line.length),
-      ];
-    });
-    const original = Object.fromEntries(rows);
-    original.similarity = result[1];
-    return original;
-  });
+    await digitalAgencySummarizedVectorStore.similaritySearchWithScore(
+      queryString,
+      10
+    );
+  const digitalAgencySummarizedPrograms = digitalAgencySummarizedResults.map(
+    (result) => {
+      const rows = result[0].pageContent.split("\n").map((line) => {
+        return [
+          line.slice(0, line.indexOf(":")),
+          line.slice(line.indexOf(":") + 2, line.length),
+        ];
+      });
+      const original = Object.fromEntries(rows);
+      original.similarity = result[1];
+      return original;
+    }
+  );
   const digitalAgencySummarizedProgramsText = digitalAgencySummarizedPrograms
     .slice(0, 3)
     .map((program) => {
@@ -113,7 +118,10 @@ export default async function handler(
     new OpenAIEmbeddings()
   );
   const residentAreaSummarizedPrograms =
-    await residentAreaSummarizedVectorStore.similaritySearchWithScore(queryString, 10);
+    await residentAreaSummarizedVectorStore.similaritySearchWithScore(
+      queryString,
+      10
+    );
   const residentAreaSummarizedProgramsText = residentAreaSummarizedPrograms
     .slice(0, 3)
     .map((program) => {
@@ -131,29 +139,28 @@ export default async function handler(
   console.log(limitDate.toLocaleString());
   const condition = nowDate.getTime() < limitDate.getTime();
 
-  if (condition) {
-    res.writeHead(200, {
-      Connection: "keep-alive",
-      "Content-Encoding": "none",
-      "Cache-Control": "no-cache",
-      "Content-Type": "text/event-stream",
-      "Transfer-Encoding": "chunked",
-    });
-    res.flushHeaders();
-    const llm = new OpenAI({
-      temperature: 0,
-      maxTokens: 1000,
-      streaming: true,
-      callbacks: [
-        {
-          handleLLMNewToken: (token: string) => {
-            res.write(`${token}`);
-          },
+  res.writeHead(200, {
+    Connection: "keep-alive",
+    "Content-Encoding": "none",
+    "Cache-Control": "no-cache",
+    "Content-Type": "text/event-stream",
+    "Transfer-Encoding": "chunked",
+  });
+  res.flushHeaders();
+  const llm = new OpenAI({
+    temperature: 0,
+    maxTokens: 1000,
+    streaming: true,
+    callbacks: [
+      {
+        handleLLMNewToken: (token: string) => {
+          res.write(`${token}`);
         },
-      ],
-    });
-    const promptTemplate = new PromptTemplate({
-      template: `
+      },
+    ],
+  });
+  const promptTemplate = new PromptTemplate({
+    template: `
 あなたはユーザーの状況を改善し、ユーザーの要望を叶える、有用なアシスタントである。
 
 ユーザーの状況または要望:
@@ -167,25 +174,17 @@ export default async function handler(
 
 ユーザーの状況を改善するために、あるいはユーザーの要望を叶えるために、これらの制度のうち、ユーザーの役立つものを簡潔かつ丁寧に紹介する文章:
     `,
-      inputVariables: ["user_query", "programs", "area_programs"],
-    });
-    const chain = new LLMChain({
-      prompt: promptTemplate,
-      llm: llm,
-    });
-    const completionRes = await chain.call({
-      user_query: query,
-      programs: digitalAgencySummarizedProgramsText,
-      area_programs: residentAreaSummarizedProgramsText,
-    });
-    console.log(completionRes);
-    res.end();
-  } else {
-    res.status(200).json({
-      programsText: digitalAgencySummarizedProgramsText,
-      completionText: completionText,
-      query: query,
-      programs: digitalAgencySummarizedPrograms,
-    });
-  }
+    inputVariables: ["user_query", "programs", "area_programs"],
+  });
+  const chain = new LLMChain({
+    prompt: promptTemplate,
+    llm: llm,
+  });
+  const completionRes = await chain.call({
+    user_query: query,
+    programs: digitalAgencySummarizedProgramsText,
+    area_programs: residentAreaSummarizedProgramsText,
+  });
+  console.log(completionRes);
+  res.end();
 }
