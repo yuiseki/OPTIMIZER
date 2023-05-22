@@ -156,6 +156,23 @@ export const OPTIMIZER: React.FC = () => {
     }
   }, [inputText, dialogueList]);
 
+  const onKeyDown: React.KeyboardEventHandler<HTMLTextAreaElement> =
+    useCallback(
+      (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
+        if ((event.ctrlKey || event.metaKey) && event.key === "Enter") {
+          console.log(
+            "onKeyDown ctrl + Enter",
+            event.currentTarget.value,
+            event.currentTarget.value.length
+          );
+          if (0 < event.currentTarget.value.length) {
+            submit();
+          }
+        }
+      },
+      [submit]
+    );
+
   return (
     <>
       <main className={styles.main}>
@@ -296,6 +313,7 @@ export const OPTIMIZER: React.FC = () => {
           <textarea
             value={inputText}
             placeholder={responding ? "..." : "災害で家が全壊しました"}
+            onKeyDown={onKeyDown}
             onChange={(e) => setInputText(e.currentTarget.value)}
             rows={4}
             style={{
