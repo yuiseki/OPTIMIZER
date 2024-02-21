@@ -25,7 +25,7 @@
     "eslint": "8.56.0",
     "eslint-config-next": "14.1.0",
     "hnswlib-node": "^1.4.2",
-    "langchain": "^0.0.102",
+    "langchain": "^0.1.20",
     "mapbox-gl": "npm:empty-npm-package@^1.0.0",
     "maplibre-gl": "^4.0.0",
     "next": "14.1.0",
