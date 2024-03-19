@@ -17,8 +17,8 @@
   },
   "dependencies": {
     "@types/node": "20.11.30",
-    "@types/react": "18.2.64",
-    "@types/react-dom": "18.2.21",
+    "@types/react": "18.2.67",
+    "@types/react-dom": "18.2.22",
     "cheerio": "^1.0.0-rc.12",
     "d3-dsv": "^2.0.0",
     "dotenv": "^16.0.3",
