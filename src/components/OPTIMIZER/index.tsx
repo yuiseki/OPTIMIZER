@@ -3,6 +3,7 @@
 import styles from "@/styles/Home.module.css";
 import { useCallback, useEffect, useState } from "react";
 import { nextJsonPost } from "@/lib/nextJsonPost";
+import { runRetrieval } from "@/lib/rag";
 
 const initializeSequence = [
   `対話型制度探索社会最適化支援システム。
@@ -122,7 +123,12 @@ export const OPTIMIZER: React.FC = () => {
     setDialogueList(newDialogueListWithUserAndAssistantAndResponse);
     await scrollToBottom();
 
-    const res = await nextJsonPost("/api/completion", { query: newInputText });
+    const { programs, areaPrograms } = await runRetrieval(newInputText);
+    const res = await nextJsonPost("/api/completion", {
+      query: newInputText,
+      programs,
+      areaPrograms,
+    });
     const stream = res.body;
     const reader = stream?.getReader();
     const decoder = new TextDecoder("utf-8");
